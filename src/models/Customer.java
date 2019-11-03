@@ -10,6 +10,17 @@ public class Customer {
     private String phoneNumber;
     private String pathPhoto;
 
+    public Customer(String firstName, String lastName, String patronymic, String mail, String password,
+                    String phoneNumber, String pathPhoto) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.mail = mail;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.pathPhoto = pathPhoto;
+    }
+
     public Customer(int id, String firstName, String lastName, String patronymic, String mail, String password, String phoneNumber, String pathPhoto) {
         this.id = id;
         this.firstName = firstName;

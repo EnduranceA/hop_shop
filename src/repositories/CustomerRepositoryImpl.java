@@ -125,9 +125,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             st.setString(3, map.get("last_name"));
             st.setString(4, map.get("patronymic"));
             st.setString(5, map.get("number_phone"));
-            if (map.get("password").equals(map.get("password_again"))) {
-                st.setString(6, customer.getPassword());
-            }
+            st.setString(6, map.get("password"));
             st.executeUpdate();
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);

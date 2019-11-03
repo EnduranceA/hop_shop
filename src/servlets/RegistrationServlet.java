@@ -47,6 +47,7 @@ public class RegistrationServlet extends HttpServlet {
                         req.getParameter("mail"),
                         req.getParameter("password"),
                         req.getParameter("phone_number"));
+                session.setAttribute("currentUser", user);
                 resp.sendRedirect("/profile");
             }
         }

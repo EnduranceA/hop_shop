@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
                     resp.sendRedirect("/profile");
                 }
                 else {
-                    req.getServletContext().getRequestDispatcher("/login").forward(req, resp);
+                    req.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
                 }
             }
         } catch (IOException | ServletException e) {
