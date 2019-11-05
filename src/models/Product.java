@@ -1,5 +1,7 @@
 package models;
 
+import java.sql.Timestamp;
+
 public class Product {
 
     private int id;
@@ -8,6 +10,9 @@ public class Product {
     private int price;
     private int count;
     private String pathPhoto;
+    private Timestamp time;
+    //private SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 
     public Product(int id, String name, String description, int price, int count, String pathPhoto) {
         this.id = id;
@@ -16,6 +21,7 @@ public class Product {
         this.price = price;
         this.count = count;
         this.pathPhoto = pathPhoto;
+        this.time = new Timestamp(System.currentTimeMillis());
     }
 
     public int getId() {
@@ -62,7 +68,9 @@ public class Product {
         return pathPhoto;
     }
 
-    public void setPathPhoto(String pathPhoto) {
-        this.pathPhoto = pathPhoto;
-    }
+    public void setPathPhoto(String pathPhoto) { this.pathPhoto = pathPhoto; }
+
+    public Timestamp getTime() { return time; }
+
+    public void setTime(Timestamp time) { this.time = time; }
 }

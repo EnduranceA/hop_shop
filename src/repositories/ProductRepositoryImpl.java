@@ -3,6 +3,7 @@ package repositories;
 import helpers.ConnectionClass;
 import models.Product;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,17 +12,31 @@ import java.util.List;
 
 public class ProductRepositoryImpl implements ProductRepository {
 
-    //language=SQL
-    private String SQL_ADD_PRODUCT = "INSERT INTO product (name, description, price, count, path_photo) " +
-            "VALUES (?, ?, ?, ?, ?) RETURNING id";
+    Connection connection;
+
+    public ProductRepositoryImpl() {
+        this.connection = ConnectionClass.getConnection();
+    }
 
     //language=SQL
-    private String SQL_FIND_ALL = "SELECT * FROM product";
+    private String SQL_ADD_PRODUCT = "INSERT INTO product (name, description, price, count, path_photo, time) " +
+            "VALUES (?, ?, ?, ?, ?) RETURNING id;";
 
+    //language=SQL
+    private String SQL_FIND_ALL = "SELECT * FROM product;";
+
+    //language=SQL
+    private String SQL_FIND_PRODUCT_BY_ID = "SELECT * FROM product WHERE id = ?;";
+
+    //language=SQL
+    private String SQL_FIND_PRODUCT_BY_PATTERN = "SELECT * FROM product where name like ?;";
+
+    //language=SQL
+    private String SQL_FIND_PRODUCTS_BY_TYPES = "SELECT * FROM product WHERE format = ? AND color = ? AND size = ?;";
     @Override
     public void save(Product product) {
         try {
-            PreparedStatement st = ConnectionClass.getConnection().prepareStatement(SQL_ADD_PRODUCT);
+            PreparedStatement st = connection.prepareStatement(SQL_ADD_PRODUCT);
             st.setString(1, product.getName());
             st.setString(2, product.getDescription());
             st.setInt(3, product.getPrice());
@@ -52,11 +67,60 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
     };
 
+    public Product findProduct(String id) {
+        Product product = null;
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_PRODUCT_BY_ID);
+            st.setString(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                product = productsRowMapper.mapRow(rs);
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return product;
+    }
+
     @Override
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
         try {
-            PreparedStatement st = ConnectionClass.getConnection().prepareStatement(SQL_FIND_ALL);
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_ALL);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                products.add(productsRowMapper.mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return products;
+    }
+
+    public List<Product> getByLikePattern(String pattern) {
+        List<Product> products = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(SQL_FIND_PRODUCT_BY_PATTERN);
+            ps.setString(1, "%" + pattern + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                products.add(productsRowMapper.mapRow(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return products;
+    }
+
+    public List<Product> getProductsByTypes(String format,
+                                            String color, String size) {
+        List<Product> products = null;
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_TYPES);
+            st.setString(1, format);
+            st.setString(2, color);
+            st.setString(3, size);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 products.add(productsRowMapper.mapRow(rs));
