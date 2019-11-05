@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="../css_files/main.css">
+</head>
+<body>
+    <!--navigation bar-->
+    <ul class="navig">
+        <li><a class="tabs" href="main_page.html">Главная страница</a></li>
+        <li><a class="tabs" href="catalog_page.html">Каталог</a></li>
+        <li><a class="tabs" href="novelties_page.html">Новинки</a></li>
+        <li><a class="tabs" href="sale_page.html">Распродажа</a></li>
+        <li><a class="tabs" href="delivery_page.html">Доставка</a></li>
+        <li style="float:right"><img class="logo" src="../pictures/logo.png" width="240px" height="60px" ></li>
+        <li><a class="navicons" href="lk_page.html"><img src="../pictures/prof.png"></a></li>
+        <li><img src="../pictures/empty.png" width="40px" alt="empty"></li>
+        <li><a class="navicons" href="shop_basket_page.html"><img src="../pictures/shopping_basket.png"></a></li>
+    </ul>
+
+    <div class="cont_shop_basket">
+        <p class="title_shop_basket">Корзина</p>
+<!--         КОРЗИНА ПУСТАЯ-->
+<!--        <div class="emptybasket">-->
+<!--            <img src="../sadface.png">-->
+<!--            <p class="text-info-basket">Грустно, когда в корзине пусто. Порадуйте себя, начав покупки прямо сейчас.</p>-->
+<!--            <form action="catalog_page.html">-->
+<!--                <button class="ctlg_button">Начать покупки</button>-->
+<!--            </form>-->
+<!--        </div>-->
+        <!-- В КОРЗИНЕ ЧТО-ТО ЕСТЬ -->
+        <div class="container results">
+            <div class="product-item">
+                <div class="product-img">
+                    <a href="">
+                        <img src="../pictures/tatu1.jpg">
+                    </a>
+                </div>
+                <div class="product-list">
+                    <h3 style="text-align: center">Тату раз</h3>
+                    <span class="shop_price">₽ 1999</span>
+                    <div class="quantity">
+                        <button class="plus-btn" type="button" name="button">
+                            <img src="../pictures/plus.svg" alt="" />
+                        </button>
+                        <input type="text" name="name" value="1" class="counter">
+                        <button class="minus-btn" type="button" name="button">
+                            <img src="../pictures/minus.svg" alt="" />
+                        </button>
+                    </div>
+                    <div class="actions">
+                        <input type="button" name="delete-from-basket" class="bask_btn" value="Удалить из корзины">
+                    </div>
+                </div>
+            </div>
+            <form action="">
+                <button class="ctlg_button">Оформить заказ</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <!--здесь типа футер-->
+    <footer>
+        <div class="container">
+            <div id="social-platforms">
+                <p>Следи за нами в соцсетях:</p>
+                <a class="btn btn-icon btn-facebook" href="#"><span>Facebook</span></a>
+                <a class="btn btn-icon btn-twitter" href="#"><span>Twitter</span></a>
+                <a class="btn btn-icon btn-googleplus" href="#"><span>Google+</span></a>
+                <a class="btn btn-icon btn-pinterest" href="#"><span>Pinterest</span></a>
+                <a class="btn btn-icon btn-linkedin" href="#"><span>LinkedIn</span></a>
+                <p>Почта: gelyaclass@gmail.com</p>
+                <p>Телефон: +7(843)-365-66-33</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.minus-btn').click(function(e){
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $this.closest('div').find('input');
+                var value = parseInt($input.val());
+                if(value > 1){value = value - 1;}
+                else{value = 0;}
+                $input.val(value);
+            });
+
+            $('.plus-btn').click(function(e){
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $this.closest('div').find('input');
+                var value = parseInt($input.val());
+                if(value < 100){value = value + 1;}
+                else{value = 100;}
+                $input.val(value);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="005c3f21-4d44-4d84-b1d8-13f7f2c86d4b" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1SIZcijAna7wvExDhuDflMuCp4c" />
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/GitHub/web-sport" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alina\WebstormProjects\untitled\pictures" />
+      <recent name="C:\Users\alina\WebstormProjects\untitled\html_files" />
+      <recent name="C:\Users\alina\WebstormProjects\untitled\css_files" />
+      <recent name="C:\Users\alina\WebstormProjects\untitled\bootstrap" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alina\WebstormProjects\untitled\pictures" />
+      <recent name="C:\Users\alina\WebstormProjects\untitled" />
+      <recent name="C:\Users\alina\WebstormProjects\untitled\js" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.successful_order.html">
+    <configuration name="Unnamed" type="ChromiumRemoteDebugType" factoryName="Chromium Remote" nameIsGenerated="true" port="9229">
+      <method v="2" />
+    </configuration>
+    <configuration name="order.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/untitled/html_files/order.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="purshase_history_page.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/untitled/html_files/purshase_history_page.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="registration_page.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/untitled/html_files/registration_page.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="shop_basket_page.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/untitled/html_files/shop_basket_page.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="successful_order.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/untitled/html_files/successful_order.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.successful_order.html" />
+        <item itemvalue="JavaScript Debug.shop_basket_page.html" />
+        <item itemvalue="JavaScript Debug.registration_page.html" />
+        <item itemvalue="JavaScript Debug.purshase_history_page.html" />
+        <item itemvalue="JavaScript Debug.order.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="005c3f21-4d44-4d84-b1d8-13f7f2c86d4b" name="Default Changelist" comment="" />
+      <created>1571253152004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1571253152004</updated>
+      <workItem from="1571253156746" duration="2490000" />
+      <workItem from="1571288753551" duration="2677000" />
+      <workItem from="1571310244211" duration="3245000" />
+      <workItem from="1571419732947" duration="7328000" />
+      <workItem from="1571468403708" duration="30543000" />
+      <workItem from="1571828868640" duration="23386000" />
+      <workItem from="1571903887851" duration="9282000" />
+      <workItem from="1571924316125" duration="7221000" />
+      <workItem from="1571932675804" duration="1299000" />
+      <workItem from="1571994893003" duration="7696000" />
+      <workItem from="1572057365486" duration="9743000" />
+      <workItem from="1572119162314" duration="292000" />
+      <workItem from="1572170638873" duration="5483000" />
+      <workItem from="1572184721357" duration="707000" />
+      <workItem from="1572259171656" duration="10464000" />
+      <workItem from="1572291710292" duration="3473000" />
+      <workItem from="1572359207436" duration="84000" />
+      <workItem from="1572380889900" duration="8498000" />
+      <workItem from="1572523806125" duration="9675000" />
+      <workItem from="1572598111873" duration="226000" />
+      <workItem from="1572603991752" duration="105000" />
+      <workItem from="1572680488428" duration="2019000" />
+      <workItem from="1572792649557" duration="4050000" />
+      <workItem from="1572870349917" duration="1795000" />
+      <workItem from="1572933697122" duration="2060000" />
+      <workItem from="1572959596486" duration="1958000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
