@@ -1,6 +1,8 @@
 package servlets;
 
 import models.Customer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import services.CustomerService;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,10 +16,12 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
 
     private CustomerService customerService;
+    private PasswordEncoder encoder;
 
     @Override
-    public void init(){
+    public void init() {
         this.customerService = new CustomerService();
+        encoder = new BCryptPasswordEncoder();
     }
 
     @Override
@@ -38,6 +42,7 @@ public class RegistrationServlet extends HttpServlet {
                 resp.sendRedirect("/profile");
             }
             else {
+                String password = req.getParameter("password");
                 ServletContext context = getServletContext();
                 customerService.addNewCustomer(context,
                         req.getParameter("first_name"),
@@ -45,7 +50,7 @@ public class RegistrationServlet extends HttpServlet {
                         req.getParameter("patronymic"),
                         req.getPart("path_photo"),
                         req.getParameter("mail"),
-                        req.getParameter("password"),
+                        encoder.encode(password),
                         req.getParameter("phone_number"));
                 session.setAttribute("currentUser", user);
                 resp.sendRedirect("/profile");

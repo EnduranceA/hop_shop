@@ -13,9 +13,7 @@
 </head>
 <body>
 <p><input id="query" oninput="f()"/></p>
-<div id="res">
-
-</div>
+<div id="res"></div>
 <script type="application/javascript">
     function f() {
         //проверяем, измненилась ли длина вводимого слова

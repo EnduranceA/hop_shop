@@ -18,10 +18,6 @@ public class ProductService {
     }
 
 
-    public List<Product> getByLikePattern(String query) {
-        return productRepository.getByLikePattern(query);
-    }
-
     public List<Product> findAllProducts() {
         return productRepository.findAll();
     }

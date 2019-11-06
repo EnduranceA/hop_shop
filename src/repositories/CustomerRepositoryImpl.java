@@ -20,10 +20,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private String SQL_SELECT_ALL = "SELECT * FROM customer";
 
     //language=SQL
-    private String SQL_FIND_CUSTOMER = "SELECT * FROM customer WHERE mail = ? AND password = ?";
+    private String SQL_FIND_CUSTOMER = "SELECT * FROM customer WHERE mail = ?;";
 
     //language=SQL
-    private String SQL_FIND_USER_BY_ID = "SELECT * FROM customer WHERE id = ?";
+    private String SQL_FIND_USER_BY_ID = "SELECT * FROM customer WHERE id = ?;";
 
     //language=SQL
     private String SQL_CHANGE_ROW = "UPDATE customer SET path_photo = ? AND first_name = ? " +
@@ -48,12 +48,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     };
 
     @Override
-    public Customer findCustomer(String mail, String password) {
+    public Customer findCustomer(String mail) {
         Customer customer = null;
         try {
             PreparedStatement st = ConnectionClass.getConnection().prepareStatement(SQL_FIND_CUSTOMER);
             st.setString(1, mail);
-            st.setString(2, password);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 customer = userRowMapper.mapRow(rs);

@@ -97,21 +97,6 @@ public class ProductRepositoryImpl implements ProductRepository {
         return products;
     }
 
-    public List<Product> getByLikePattern(String pattern) {
-        List<Product> products = new ArrayList<>();
-        try {
-            PreparedStatement ps = connection.prepareStatement(SQL_FIND_PRODUCT_BY_PATTERN);
-            ps.setString(1, "%" + pattern + "%");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                products.add(productsRowMapper.mapRow(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
-        return products;
-    }
 
     public List<Product> getProductsByTypes(String format,
                                             String color, String size) {

@@ -12,27 +12,6 @@
     <title>Title</title>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
-<script type="application/javascript">
-    function f() {
-        $.ajax({
-            type: "POST",
-            url: "/catalog",
-            data: $("#allProducts").serialize(),
-            dataType: "json",
-            success: function (msg) {
-                if (msg.objects.length > 0) {
-                    $("#result").html("");
-                    for (var i = 0; i < msg.objects.length; i++) {
-                        $("#result").append("<li>" + msg.objects[i].name + "</li>");
-                    }
-                } else {
-                    $("#result").html("No results..");
-                }
-            }
-        })
-    }
-</script>
 <form method = "post" id="allProducts">
     <select name="format" id="format">
         <option selected disabled>Выберите формат</option>
@@ -52,6 +31,29 @@
     </select>
     <p><input type="button" id="sendreq" value="Found" onclick="f()"></p>
 </form>
+<script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
+<script type="application/javascript">
+    function f() {
+        $.ajax({
+            type: "POST",
+            url: "/catalog",
+            data: $("#allProducts").serialize(),
+            dataType: "json",
+            //success - в случаем удачного завершения запроса
+            //msg - это данные от сервера
+            success: function (msg) {
+                if (msg.objects.length > 0) {
+                    $("#result").html("");
+                    for (var i = 0; i < msg.objects.length; i++) {
+                        $("#result").append("<li>" + msg.objects[i].name + "</li>");
+                    }
+                } else {
+                    $("#result").html("No results..");
+                }
+            }
+        })
+    }
+</script>
 <div id="result">
     <c:if test="${allProducts != null}">
         <c:forEach var="tr" items="${allProducts}">

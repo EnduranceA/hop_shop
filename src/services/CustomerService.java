@@ -17,8 +17,8 @@ public class CustomerService {
         this.customerRepository = new CustomerRepositoryImpl();
     }
 
-    public Customer findCustomer(String mail, String password) {
-        return customerRepository.findCustomer(mail, password);
+    public Customer findCustomerBy(String mail) {
+        return customerRepository.findCustomer(mail);
     }
 
     public void update(Customer customer, Map<String, String> map) {
