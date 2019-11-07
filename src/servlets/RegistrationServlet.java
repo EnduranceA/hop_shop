@@ -21,7 +21,7 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     public void init() {
         this.customerService = new CustomerService();
-        encoder = new BCryptPasswordEncoder();
+        this.encoder = new BCryptPasswordEncoder();
     }
 
     @Override

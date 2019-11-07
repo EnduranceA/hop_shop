@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<form method = "post" id="allProducts">
+<form method ="post" id="allProducts">
     <select name="format" id="format">
         <option selected disabled>Выберите формат</option>
         <option value="picture">Рисунок</option>
@@ -54,12 +54,17 @@
         })
     }
 </script>
+
 <div id="result">
     <c:if test="${allProducts != null}">
         <c:forEach var="tr" items="${allProducts}">
-            <p>${tr.getName()}</p>
+            <a href="/catalog?id=${tr.getId()}">
+                <p>${tr.getPathPhoto()}</p>
+                <p>${tr.getName()}</p>
+            </a>
         </c:forEach>
     </c:if>
 </div>
+
 </body>
 </html>

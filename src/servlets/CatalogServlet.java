@@ -24,15 +24,19 @@ public class CatalogServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         List<Product> products = productService.findAllProducts();
         resp.setContentType("text/html");
         req.setAttribute("allProducts", products);
-        req.getServletContext().getRequestDispatcher("/jsp/catalog.jsp").forward(req, resp);
+        try {
+            req.getServletContext().getRequestDispatcher("/jsp/catalog.jsp").forward(req, resp);
+        } catch (ServletException | IOException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         List<Product> products = productService.getProductsByTypes(req.getParameter("format"),
                 req.getParameter("color"), req.getParameter("size"));
         JSONArray array = new JSONArray();
@@ -42,6 +46,10 @@ public class CatalogServlet extends HttpServlet {
         JSONObject jo = new JSONObject();
         jo.put("objects", array);
         resp.setContentType("text/json");
-        resp.getWriter().write(jo.toString());
+        try {
+            resp.getWriter().write(jo.toString());
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 }

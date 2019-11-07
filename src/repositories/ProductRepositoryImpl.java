@@ -28,8 +28,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     //language=SQL
     private String SQL_FIND_PRODUCT_BY_ID = "SELECT * FROM product WHERE id = ?;";
 
-    //language=SQL
-    private String SQL_FIND_PRODUCT_BY_PATTERN = "SELECT * FROM product where name like ?;";
+    //private=SQL
+    private String SQL_FIND_NEW_ITEMS = "SELECT * FROM product where time > CURRENT_TIMESTAMP - interval '100 hours';";
 
     //language=SQL
     private String SQL_FIND_PRODUCTS_BY_TYPES = "SELECT * FROM product WHERE format = ? AND color = ? AND size = ?;";
@@ -67,11 +67,11 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
     };
 
-    public Product findProduct(String id) {
+    public Product findProduct(int id) {
         Product product = null;
         try {
             PreparedStatement st = connection.prepareStatement(SQL_FIND_PRODUCT_BY_ID);
-            st.setString(1, id);
+            st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 product = productsRowMapper.mapRow(rs);
@@ -114,5 +114,19 @@ public class ProductRepositoryImpl implements ProductRepository {
             throw new IllegalArgumentException(e);
         }
         return products;
+    }
+
+    public List<Product> findNewItems() {
+        List<Product> newItems = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_NEW_ITEMS);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                newItems.add(productsRowMapper.mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return newItems;
     }
 }
