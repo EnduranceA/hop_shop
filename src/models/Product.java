@@ -11,10 +11,12 @@ public class Product {
     private int count;
     private String pathPhoto;
     private Timestamp time;
-    //private SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private String size;
+    private String color;
+    private String format;
 
-
-    public Product(int id, String name, String description, int price, int count, String pathPhoto) {
+    public Product(int id, String name, String description, int price,
+                   int count, String pathPhoto, String time, String size, String color, String format) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -22,6 +24,9 @@ public class Product {
         this.count = count;
         this.pathPhoto = pathPhoto;
         this.time = new Timestamp(System.currentTimeMillis());
+        this.size = size;
+        this.color = color;
+        this.format = format;
     }
 
     public int getId() {
@@ -73,4 +78,28 @@ public class Product {
     public Timestamp getTime() { return time; }
 
     public void setTime(Timestamp time) { this.time = time; }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
 }

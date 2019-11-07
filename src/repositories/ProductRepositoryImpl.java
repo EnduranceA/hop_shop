@@ -19,8 +19,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     //language=SQL
-    private String SQL_ADD_PRODUCT = "INSERT INTO product (name, description, price, count, path_photo, time) " +
-            "VALUES (?, ?, ?, ?, ?) RETURNING id;";
+    private String SQL_ADD_PRODUCT = "INSERT INTO product (name, description, price, count, path_photo, time, size, color, format) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;";
 
     //language=SQL
     private String SQL_FIND_ALL = "SELECT * FROM product;";
@@ -42,6 +42,9 @@ public class ProductRepositoryImpl implements ProductRepository {
             st.setInt(3, product.getPrice());
             st.setInt(4, product.getCount());
             st.setString(5, product.getPathPhoto());
+            st.setString(6, product.getSize());
+            st.setString(7, product.getColor());
+            st.setString(8, product.getFormat());
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 product.setId(rs.getInt("id"));
@@ -59,9 +62,14 @@ public class ProductRepositoryImpl implements ProductRepository {
             String name = row.getString("name");
             String description = row.getString("description");
             Integer price = row.getInt("price");
-            Integer count = row.getInt("mail");
-            String pathPhoto = row.getString("pathPhoto");
-            return new Product(id, name, description, price, count, pathPhoto);
+            Integer count = row.getInt("count");
+            String pathPhoto = row.getString("path_photo");
+            String time = row.getString("time");
+            String size = row.getString("size");
+            String color = row.getString("color");
+            String format = row.getString("format");
+            return new Product(id, name, description, price, count, pathPhoto,
+                    time, size, color, format);
         }catch (SQLException e){
             throw new IllegalArgumentException(e);
         }

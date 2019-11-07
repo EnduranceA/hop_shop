@@ -26,7 +26,7 @@ public class HomeServlet extends HttpServlet {
         //лист новинок (из 5 элементов)
         List<Product> newItems = productService.getNewItems();
         //лист рекомендаций (из 5 элементов)
-        List<Product> recommendations = productService.findRecommedations();
+        List<Product> recommendations = productService.findAllProducts();
         resp.setContentType("text/html");
         req.setAttribute("newItems", newItems);
         req.setAttribute("recommendations", recommendations);

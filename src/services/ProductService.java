@@ -19,12 +19,7 @@ public class ProductService {
     }
 
     public List<Product> getNewItems () {
-        List<Product> products = new ArrayList<>();
-        List<Product> newItems = productRepository.findNewItems();
-        for (int i = 0; i < 5; i++) {
-            products.add(newItems.get(i));
-        }
-        return products;
+        return productRepository.findNewItems();
     }
 
     public List<Product> findAllProducts() {
@@ -35,12 +30,4 @@ public class ProductService {
         return productRepository.getProductsByTypes(format, color, size);
     }
 
-    public List<Product> findRecommedations() {
-        List<Product> recommendations = new ArrayList<>();
-        List<Product> products = findAllProducts();
-        for (int i = 0; i < 5; i++) {
-            recommendations.add(products.get(i));
-        }
-        return recommendations;
-    }
 }

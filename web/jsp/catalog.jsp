@@ -58,7 +58,7 @@
 <div id="result">
     <c:if test="${allProducts != null}">
         <c:forEach var="tr" items="${allProducts}">
-            <a href="/catalog?id=${tr.getId()}">
+            <a href="/product?id=${tr.getId()}">
                 <p>${tr.getPathPhoto()}</p>
                 <p>${tr.getName()}</p>
             </a>
