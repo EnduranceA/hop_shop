@@ -37,8 +37,10 @@ public class CatalogServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        List<Product> products = productService.getProductsByTypes(req.getParameter("format"),
-                req.getParameter("color"), req.getParameter("size"));
+        List<Product> products = productService.getProductsByTypes(
+                req.getParameter("format"),
+                req.getParameter("color"),
+                req.getParameter("size"));
         JSONArray array = new JSONArray();
         for (Product product: products) {
             array.put(new JSONObject(product));
