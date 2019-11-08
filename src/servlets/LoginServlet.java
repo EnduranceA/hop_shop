@@ -50,6 +50,8 @@ public class LoginServlet extends HttpServlet {
                 resp.sendRedirect("/profile");
             }
             else {
+                String mail = req.getParameter("mail");
+                System.out.println(mail);
                 Customer customer = customerService.findCustomerBy(req.getParameter("mail"));
                 if (encoder.matches(req.getParameter("password"), customer.getPassword())) {
                     session.setAttribute("currentUser", customer);
