@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="../js/addToCart.js"></script>
 </head>
 <body>
 <c:if test="${product != null}">
@@ -25,54 +26,6 @@
 <button type="submit" name="basket" value="В корзину" onclick=f()></button>
 
 <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
-<script type="application/javascript">
-    function f() {
-        $.ajax({
-            type: "POST",
-            url: "/product",
-            data: $("#product").serialize(),
-            dataType: "json",
-            //success - в случаем удачного завершения запроса
-            //msg - это данные от сервера
-            success: function (msg) {
-                $('.add-to-cart').on('click', function (e) {
-                    e.preventDefault();
-                    var shows = parseInt($(this).data("show"), 10);
-                    if (shows == 0) {
-                        $("#mot").show(); //Показываем блок с id="mot"
-                    }
-                })
-            }
-        })
-    }
-</script>
-<div class="catalog-tovarov">
-    <div id="mot">
-        <img width="30px" src="http://sparkysite.ru/small/check/check03/scheck264.png" />
-    </div>
-    <div class="price">
-        <span>444 руб.</span><br/>
-        <a class="add-to-cart" data-price="10000" data-show="0" href="#">В корзину</a>
-    </div>
-</div>
-<div class="catalog-tovarov">
-    <div id="mot">
-        <img width="30px" src="http://sparkysite.ru/small/check/check03/scheck264.png" />
-    </div>
-    <div class="price">
-        <span>444 руб.</span><br/>
-        <a class="add-to-cart" data-price="10000" data-show="0" href="#">В корзину</a>
-    </div>
-</div>
-<div class="catalog-tovarov">
-    <div id="mot">
-        <img width="30px" src="http://sparkysite.ru/small/check/check03/scheck264.png" />
-    </div>
-    <div class="price">
-        <span>444 руб.</span><br/>
-        <a class="add-to-cart" data-price="10000" data-show="0" href="#">В корзину</a>
-    </div>
-</div>
 
 </body>
 </html>

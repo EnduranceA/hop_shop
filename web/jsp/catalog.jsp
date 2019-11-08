@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
 </head>
 <body>
 <form method ="post" id="allProducts">
@@ -31,7 +32,6 @@
     </select>
     <p><input type="button" id="sendreq" value="Found" onclick="f()"></p>
 </form>
-<script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
 <script type="application/javascript">
     function f() {
         $.ajax({

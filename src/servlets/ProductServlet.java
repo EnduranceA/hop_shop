@@ -2,7 +2,6 @@ package servlets;
 
 import models.Customer;
 import models.Product;
-import org.json.JSONObject;
 import services.ProductService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {
@@ -37,14 +38,24 @@ public class ProductServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("order") != null) {
-            req.getServletContext().getRequestDispatcher("/jsp/order.jsp").forward(req, resp);
-        }
-        else {
-            if (req.getParameter("basket") != null) {
-                req.getServletContext().getRequestDispatcher("/jsp/basket.jsp").forward(req,resp);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            HttpSession session = req.getSession();
+            Customer customer = (Customer) session.getAttribute("currentUser");
+            List<Product> basket = (List<Product>) session.getAttribute("basket");
+            if (customer != null) {
+                basket.add(product);
+                //добавить продукт в корзину(basket_product)
             }
+            else {
+                if (basket == null) {
+                    basket = new ArrayList<>();
+                }
+                basket.add(product);
+            }
+            req.getServletContext().getRequestDispatcher("/jsp/order.jsp").forward(req,resp);
+        } catch (ServletException |IOException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 }
