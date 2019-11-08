@@ -11,6 +11,15 @@
     <title>Title</title>
 </head>
 <body>
-
+<p>Регистрация</p>
+<form method="post" action="/order">
+    <label for="mail">User mail
+        <input class="input-field" type="text" id="mail" name="mail">
+    </label>
+    <label for="password">Password
+        <input class="input-field" type="password" id="password" name="password">
+    </label>
+    <input type="submit" value="Sign Up">
+</form>
 </body>
 </html>
