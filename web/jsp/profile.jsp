@@ -18,13 +18,13 @@
 <body>
 <!--navigation bar-->
 <ul class="navig">
-    <li><a class="tabs" href="home.jsp">Главная страница</a></li>
-    <li><a class="tabs" href="catalog.jsp">Каталог</a></li>
-    <li><a class="tabs" href="novelties.jsp">Новинки</a></li>
-    <li><a class="tabs" href="sale.jsp">Распродажа</a></li>
-    <li><a class="tabs" href="delivery.jsp">Доставка</a></li>
+    <li><a class="tabs" href="/home">Главная страница</a></li>
+    <li><a class="tabs" href="/catalog">Каталог</a></li>
+    <li><a class="tabs" href="/novelties">Новинки</a></li>
+    <li><a class="tabs" href="/sale">Распродажа</a></li>
+    <li><a class="tabs" href="/delivery">Доставка</a></li>
     <li style="float:right"><img class="logo" src="../pictures/logo.png" width="240px" height="60px" ></li>
-    <li><a class="navicons" href="profile.jsp"><img src="../pictures/prof.png"></a></li>
+    <li><a class="navicons" href="/profile"><img src="../pictures/prof.png"></a></li>
     <li><img src="../pictures/empty.png" width="40px" alt="empty"></li>
     <li><a class="navicons" href="basket.jsp"><img src="../pictures/shopping_basket.png"></a></li>
 </ul>
