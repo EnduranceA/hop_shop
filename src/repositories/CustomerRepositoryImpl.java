@@ -2,7 +2,9 @@ package repositories;
 
 import helpers.ConnectionClass;
 import models.Customer;
+import models.Product;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +13,12 @@ import java.util.List;
 import java.util.Map;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
+
+    private Connection connection;
+
+    public CustomerRepositoryImpl() {
+        this.connection = ConnectionClass.getConnection();
+    }
 
     //language=SQL
     private String SQL_INSERT_CUSTOMER = "INSERT INTO customer (first_name, last_name, patronymic, mail, password, phone_number, path_photo) " +
@@ -51,7 +59,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public Customer findCustomer(String mail) {
         Customer customer = null;
         try {
-            PreparedStatement st = ConnectionClass.getConnection().prepareStatement(SQL_FIND_CUSTOMER);
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_CUSTOMER);
             st.setString(1, mail);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -67,7 +75,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public void save(Customer customer) {
         PreparedStatement st = null;
         try {
-            st = ConnectionClass.getConnection().prepareStatement(SQL_INSERT_CUSTOMER);
+            st = connection.prepareStatement(SQL_INSERT_CUSTOMER);
             st.setString(1, customer.getFirstName());
             st.setString(2, customer.getLastName());
             st.setString(3, customer.getPatronymic());
@@ -90,7 +98,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public List<Customer> findAll() {
         List<Customer> customers = new ArrayList<>();
         try {
-            PreparedStatement st = ConnectionClass.getConnection().prepareStatement(SQL_SELECT_ALL);
+            PreparedStatement st = connection.prepareStatement(SQL_SELECT_ALL);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 customers.add(userRowMapper.mapRow(rs));
@@ -104,7 +112,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public Customer findUserById(int id) {
         Customer customer = null;
         try {
-            PreparedStatement st = ConnectionClass.getConnection().prepareStatement(SQL_FIND_USER_BY_ID);
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_USER_BY_ID);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -118,7 +126,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     public void changeRow(Customer customer, Map<String, String> map) {
         try {
-            PreparedStatement st = ConnectionClass.getConnection().prepareStatement(SQL_CHANGE_ROW);
+            PreparedStatement st = connection.prepareStatement(SQL_CHANGE_ROW);
             st.setString(1, map.get("path_photo"));
             st.setString(2, map.get("first_name"));
             st.setString(3, map.get("last_name"));

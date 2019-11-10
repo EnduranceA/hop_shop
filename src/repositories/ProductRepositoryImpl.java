@@ -33,6 +33,10 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     //language=SQL
     private String SQL_FIND_PRODUCTS_BY_TYPES = "SELECT * FROM product WHERE format = ? AND color = ? AND size = ?;";
+
+    //language=SQL
+    private String SQL_FIND_BASKET = "SELECT * FROM product WHERE (SELECT * basket WHERE id_custome = ?);";
+
     @Override
     public void save(Product product) {
         try {
@@ -137,4 +141,19 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
         return newItems;
     }
+    public List<Product> findBasket(int id) {
+        List<Product> basket = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_BASKET);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                basket.add(productsRowMapper.mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return basket;
+    }
+
 }

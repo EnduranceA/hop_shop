@@ -1,12 +1,14 @@
 package services;
 
 import models.Customer;
+import models.Product;
 import repositories.CustomerRepositoryImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class CustomerService {
@@ -52,5 +54,7 @@ public class CustomerService {
                 mail, password, numberPhone, "/" + localdir + "/" + filename);
         customerRepository.save(customer);
     }
+
+
 
 }

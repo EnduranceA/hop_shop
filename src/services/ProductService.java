@@ -2,8 +2,6 @@ package services;
 
 import models.Product;
 import repositories.ProductRepositoryImpl;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
@@ -28,6 +26,9 @@ public class ProductService {
 
     public List<Product> getProductsByTypes(String format, String color, String size) {
         return productRepository.getProductsByTypes(format, color, size);
+    }
+    public List<Product> findBasket(int id) {
+        return productRepository.findBasket(id);
     }
 
 }

@@ -32,15 +32,6 @@
 
 <div class="cont_shop_basket">
     <p class="title_shop_basket">Корзина</p>
-    <!--         КОРЗИНА ПУСТАЯ-->
-    <!--        <div class="emptybasket">-->
-    <!--            <img src="../sadface.png">-->
-    <!--            <p class="text-info-basket">Грустно, когда в корзине пусто. Порадуйте себя, начав покупки прямо сейчас.</p>-->
-    <!--            <form action="catalog_page.html">-->
-    <!--                <button class="ctlg_button">Начать покупки</button>-->
-    <!--            </form>-->
-    <!--        </div>-->
-    <!-- В КОРЗИНЕ ЧТО-ТО ЕСТЬ -->
     <div class="container results">
         <c:choose>
             <c:when test="${basket != null}">
@@ -85,11 +76,6 @@
         </c:choose>
     </div>
 </div>
-
-
-
-
-
 <!--здесь типа футер-->
 <footer>
     <div class="container">
