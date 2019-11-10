@@ -2,6 +2,8 @@ package services;
 
 import models.Product;
 import repositories.ProductRepositoryImpl;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
@@ -31,4 +33,21 @@ public class ProductService {
         return productRepository.findBasket(id);
     }
 
+    public List<Product> getNovelties() {
+        List<Product> newItems = new ArrayList<>();
+        List<Product> products = getNewItems();
+        for (int i = 0; i < 5; i++) {
+            newItems.add(products.get(i));
+        }
+        return newItems;
+    }
+
+    public List<Product> findRecommendation() {
+        List<Product> products = new ArrayList<>();
+        List<Product> recommendations = findAllProducts();
+        for (int i = 0; i < 5; i++) {
+            products.add(recommendations.get(i));
+        }
+        return products;
+    }
 }

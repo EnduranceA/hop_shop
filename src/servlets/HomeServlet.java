@@ -24,9 +24,9 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         //лист новинок (из 5 элементов)
-        List<Product> newItems = productService.getNewItems();
+        List<Product> newItems = productService.getNovelties();
         //лист рекомендаций (из 5 элементов)
-        List<Product> recommendations = productService.findAllProducts();
+        List<Product> recommendations = productService.findRecommendation();
         resp.setContentType("text/html");
         req.setAttribute("newItems", newItems);
         req.setAttribute("recommendations", recommendations);
