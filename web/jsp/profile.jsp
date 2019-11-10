@@ -6,14 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Личный кабинет</title>
     <link rel="stylesheet" href="../css_files/main.css">
-
 </head>
 <body>
 <!--navigation bar-->
@@ -26,21 +24,24 @@
     <li style="float:right"><img class="logo" src="../pictures/logo.png" width="240px" height="60px" ></li>
     <li><a class="navicons" href="/profile"><img src="../pictures/prof.png"></a></li>
     <li><img src="../pictures/empty.png" width="40px" alt="empty"></li>
-    <li><a class="navicons" href="basket.jsp"><img src="../pictures/shopping_basket.png"></a></li>
+    <li><a class="navicons" href="/basket"><img src="../pictures/shopping_basket.png"></a></li>
 </ul>
 
 <div class="container">
     <div class="widget">
         <p class="title_lk">Личный кабинет</p>
         <ul>
-            <li class="current"><a href="profile.jsp">Профиль</a></li>
+            <li class="current"><a href="/profile">Профиль</a></li>
             <li><a href="">История покупок</a></li>
             <li><a href="">Избранное</a></li>
         </ul>
+        <form method="get" action="/logout" class="btn_logout">
+            <input type="submit" value="Выйти">
+        </form>
     </div>
     <div class="cont_lk">
         <div class="title_lk">Профиль</div>
-        <form class="reg-form" action="" method="post">
+        <form class="reg-form" action="/profile" method="post">
             <div class="form-row">
                 <label for="form_fname">Имя:</label>
                 <input type="text" id="form_fname" name="first_name" value="${user.getFirstName()}">

@@ -39,7 +39,7 @@
     <li style="float:right"><img class="logo" src="../pictures/logo.png" width="240px" height="60px" ></li>
     <li><a class="navicons" href="/profile"><img src="../pictures/prof.png"></a></li>
     <li><img src="../pictures/empty.png" width="40px" alt="empty"></li>
-    <li><a class="navicons" href="basket.jsp"><img src="../pictures/shopping_basket.png"></a></li>
+    <li><a class="navicons" href="/basket"><img src="../pictures/shopping_basket.png"></a></li>
 </ul>
 
 <div class="cont_reg_auth ">

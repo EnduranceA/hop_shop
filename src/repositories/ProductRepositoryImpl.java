@@ -108,7 +108,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     public List<Product> getProductsByTypes(String format,
                                             String color, String size) {
-        List<Product> products = null;
+        List<Product> products = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_TYPES);
             st.setString(1, format);

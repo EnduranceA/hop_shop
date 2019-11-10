@@ -13,6 +13,28 @@
     <meta charset="UTF-8">
     <title>Каталог</title>
     <link rel="stylesheet" href="../css_files/main.css">
+    <script type="application/javascript">
+        function f() {
+            $.ajax({
+                type: "POST",
+                url: "/catalog",
+                data: $("#allProducts").serialize(),
+                dataType: "json",
+                //success - в случаем удачного завершения запроса
+                //msg - это данные от сервера
+                success: function (msg) {
+                    if (msg.objects.length > 0) {
+                        $("#results").html("");
+                        for (var i = 0; i < msg.objects.length; i++) {
+                            $("#results").append("<li>" + msg.objects[i].name + "</li>");
+                        }
+                    } else {
+                        $("#results").html("No results..");
+                    }
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <!--navigation bar-->
@@ -25,7 +47,7 @@
     <li style="float:right"><img class="logo" src="../pictures/logo.png" width="240px" height="60px" ></li>
     <li><a class="navicons" href="/profile"><img src="../pictures/prof.png"></a></li>
     <li><img src="../pictures/empty.png" width="40px" alt="empty"></li>
-    <li><a class="navicons" href="basket.jsp"><img src="../pictures/shopping_basket.png"></a></li>
+    <li><a class="navicons" href="/basket"><img src="../pictures/shopping_basket.png"></a></li>
 </ul>
 
 <div class="cont_catalog">
@@ -52,39 +74,27 @@
         </form>
     </div>
     <div class="container-fluid results">
-        <div class="product-item">
-            <div class="product-img">
-                <a href="">
-                    <img src="../pictures/tatu1.jpg">
-                </a>
-            </div>
-            <div class="product-list">
-                <h3>Тату раз</h3>
-                <span class="price">₽ 1999</span>
-                <div class="actions">
-                    <!--<a href="" class="cart-button">В корзину</a>-->
-                    <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
-                    <!--<a href="" class="wishlist">В избранное</a>-->
-                    <input type="button" name="add-to-fav" class="btns fav" value="В избранное">
+    <c:if test="${allProducts != null}">
+        <c:forEach var="tr" items="${allProducts}">
+            <div class="product-item">
+                <div class="product-img">
+                    <a href="/product?id=${tr.getId()}">
+                        <img src="${tr.getPathPhoto()}">
+                    </a>
+                </div>
+                <div class="product-list">
+                    <h3>${tr.getName()}</h3>
+                    <span class="price">₽ ${tr.getPrice()}</span>
+                    <div class="actions">
+                        <!--<a href="" class="cart-button">В корзину</a>-->
+                        <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
+                        <!--<a href="" class="wishlist">В избранное</a>-->
+                        <input type="button" name="add-to-fav" class="btns fav" value="В избранное">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="product-item">
-            <div class="product-img">
-                <a href="">
-                    <img src="../pictures/tatu1.jpg">
-                </a>
-            </div>
-            <div class="product-list">
-                <h3>Тату раз</h3>
-                <span class="price">₽ 1999</span>
-                <!--<a href="" class="cart-button">В корзину</a>-->
-                <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
-                <!--<a href="" class="wishlist">В избранное</a>-->
-                <input type="button" name="add-to-fav" class="btns fav" value="В избранное">
-            </div>
-        </div>
-
+        </c:forEach>
+    </c:if>
     </div>
 </div>
 
@@ -106,39 +116,4 @@
 </body>
 </html>
 
-<script type="application/javascript">
-    function f() {
-        $.ajax({
-            type: "POST",
-            url: "/catalog",
-            data: $("#allProducts").serialize(),
-            dataType: "json",
-            //success - в случаем удачного завершения запроса
-            //msg - это данные от сервера
-            success: function (msg) {
-                if (msg.objects.length > 0) {
-                    $("#result").html("");
-                    for (var i = 0; i < msg.objects.length; i++) {
-                        $("#result").append("<li>" + msg.objects[i].name + "</li>");
-                    }
-                } else {
-                    $("#result").html("No results..");
-                }
-            }
-        })
-    }
-</script>
 
-<div id="result">
-    <c:if test="${allProducts != null}">
-        <c:forEach var="tr" items="${allProducts}">
-            <a href="/product?id=${tr.getId()}">
-                <p>${tr.getPathPhoto()}</p>
-                <p>${tr.getName()}</p>
-            </a>
-        </c:forEach>
-    </c:if>
-</div>
-
-</body>
-</html>
