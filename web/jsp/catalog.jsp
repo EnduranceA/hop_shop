@@ -13,23 +13,43 @@
     <meta charset="UTF-8">
     <title>Каталог</title>
     <link rel="stylesheet" href="../css_files/main.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
     <script type="application/javascript">
         function f() {
             $.ajax({
                 type: "POST",
                 url: "/catalog",
-                data: $("#allProducts").serialize(),
+                data: $("#product_select").serialize(),
                 dataType: "json",
                 //success - в случаем удачного завершения запроса
                 //msg - это данные от сервера
                 success: function (msg) {
+                    $("#results").html("");
                     if (msg.objects.length > 0) {
-                        $("#results").html("");
                         for (var i = 0; i < msg.objects.length; i++) {
-                            $("#results").append("<li>" + msg.objects[i].name + "</li>");
+                            $("#results").append(
+                                "<div class=\"product-item\">\n" +
+                                "                <div class=\"product-img\">\n" +
+                                "                    <a href=\"/product?id=" + msg.objects[i].id + "\">\n" +
+                                "                        <img src=\"" + msg.objects[i].pathPhoto + "\">\n" +
+                                "                    </a>\n" +
+                                "                </div>\n" +
+                                "                <div class=\"product-list\">\n" +
+                                "                    <h3>" + msg.objects[i].name + "</h3>\n" +
+                                "                    <span class=\"price\">₽" + msg.objects[i].price +"</span>\n" +
+                                "                    <div class=\"actions\">\n" +
+                                "                        <!--<a href=\"\" class=\"cart-button\">В корзину</a>-->\n" +
+                                "                        <input type=\"button\" name=\"go-to-basket\" class=\"btns bask\" value=\"В корзину\">\n" +
+                                "                        <!--<a href=\"\" class=\"wishlist\">В избранное</a>-->\n" +
+                                "                        <input type=\"button\" name=\"add-to-fav\" class=\"btns fav\" value=\"В избранное\">\n" +
+                                "                    </div>\n" +
+                                "                </div>\n" +
+                                "            </div>"
+                            );
                         }
-                    } else {
-                        $("#results").html("No results..");
+                    }
+                    else {
+                        $("#results").html("Нет результатов! Повторите Ваш запрос:)");
                     }
                 }
             })
@@ -52,7 +72,7 @@
 <div class="cont_catalog">
     <p class="title_catalog">Каталог</p>
     <div class="search">
-        <form method="get" action="" name="search-form">
+        <form method="post" id="product_select" name="search-form">
             <select name="format"  class="select-css">
                 <option disabled selected>Выберите формат</option>
                 <option value="picture">Рисунок</option>
@@ -69,10 +89,10 @@
                 <option value="average">Средняя</option>
                 <option value="big">Большая</option>
             </select>
-            <input class="submit_but" type="submit" value="Найти">
+            <input class="submit_but" type="button" value="Найти" onclick="f()">
         </form>
     </div>
-    <div class="container-fluid results">
+    <div class="container-fluid results" id="results">
     <c:if test="${allProducts != null}">
         <c:forEach var="tr" items="${allProducts}">
             <div class="product-item">
