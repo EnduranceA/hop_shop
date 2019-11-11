@@ -109,7 +109,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customers;
     }
 
-    public Customer findUserById(int id) {
+    public Customer findUserBy(int id) {
         Customer customer = null;
         try {
             PreparedStatement st = connection.prepareStatement(SQL_FIND_USER_BY_ID);

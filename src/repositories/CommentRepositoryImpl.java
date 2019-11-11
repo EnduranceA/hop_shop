@@ -2,11 +2,7 @@ package repositories;
 
 import helpers.ConnectionClass;
 import models.Comment;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class CommentRepositoryImpl implements CommentRepository {
@@ -20,10 +16,26 @@ public class CommentRepositoryImpl implements CommentRepository {
     //language=SQL
     private String SQL_SAVE_COMMENT = "INSERT INTO comment (customer_id, time, text) " +
             "VALUES (?, ?, ?) reurning id;";
+
+    //language=SQL
+    private String SQL_FIND_COMMENTS = "SELECT * FROM comment WHERE id = ?;";
+
     @Override
     public List<Comment> findAll() {
         return null;
     }
+
+    public RowMapper<Comment> commentsRowMapper = row -> {
+        try{
+            Integer id = row.getInt("id");
+            Integer customerId = row.getInt("customer_id");
+            Timestamp time = row.getTimestamp("time");
+            String text = row.getString("text");
+            return new Comment(id, customerId, time, text);
+        }catch (SQLException e){
+            throw new IllegalArgumentException(e);
+        }
+    };
 
     @Override
     public void save(Comment comment) {
@@ -39,5 +51,20 @@ public class CommentRepositoryImpl implements CommentRepository {
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public List<Comment> findCommentsBy(int id) {
+        List<Comment> comments = null;
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_COMMENTS);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                comments.add(commentsRowMapper.mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return comments;
     }
 }

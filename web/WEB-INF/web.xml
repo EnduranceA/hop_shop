@@ -11,6 +11,7 @@
         <url-pattern>*.js</url-pattern>
         <url-pattern>*.JPG</url-pattern>
         <url-pattern>*.css</url-pattern>
+        <url-pattern>*.svg</url-pattern>
     </servlet-mapping>
 
 </web-app>

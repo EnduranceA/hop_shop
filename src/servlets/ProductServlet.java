@@ -1,7 +1,9 @@
 package servlets;
 
+import models.Comment;
 import models.Customer;
 import models.Product;
+import services.CommentService;
 import services.ProductService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +14,19 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {
 
     private ProductService productService;
+    private CommentService commentService;
     private Product product;
 
     @Override
     public void init() {
         productService = new ProductService();
+        commentService = new CommentService();
     }
 
     @Override
@@ -30,6 +35,8 @@ public class ProductServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         product = productService.findProductBy(id);
         session.setAttribute("product", product);
+        Map<Comment, Customer> comments = commentService.findCommentBy(product.getId());
+        session.setAttribute("comments", comments);
         try {
             req.getServletContext().getRequestDispatcher("/jsp/product.jsp").forward(req,resp);
         } catch (ServletException | IOException e) {

@@ -2,13 +2,12 @@ package servlets;
 
 import models.Comment;
 import models.Customer;
-import models.Product;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import services.CommentService;
 import services.ProductService;
 
-import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Timestamp;
 
+@WebServlet("/comment")
 public class CommentServlet extends HttpServlet {
 
     private ProductService productService;
@@ -40,10 +40,9 @@ public class CommentServlet extends HttpServlet {
         String text = req.getParameter("text");
         Comment comment = new Comment(idCustomer, time, text);
         commentService.add(comment);
-        JSONArray ja = new JSONArray();
-        ja.put(new JSONObject(comment));
         JSONObject jo = new JSONObject();
-        jo.put("objects", ja);
+        jo.put("comments", comment);
+        jo.put("user", customer);
         resp.setContentType("text/json");
         try {
             resp.getWriter().write(jo.toString());
