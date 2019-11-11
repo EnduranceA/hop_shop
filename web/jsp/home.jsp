@@ -21,7 +21,6 @@
     <li><a class="tabs" href="/catalog">Каталог</a></li>
     <li><a class="tabs" href="/novelties">Новинки</a></li>
     <li><a class="tabs" href="/sale">Распродажа</a></li>
-    <li><a class="tabs" href="/delivery">Доставка</a></li>
     <li style="float:right"><img class="logo" src="../pictures/logo.png" width="240px" height="60px" ></li>
     <li><a class="navicons" href="/profile"><img src="../pictures/prof.png"></a></li>
     <li><img src="../pictures/empty.png" width="40px" alt="empty"></li>

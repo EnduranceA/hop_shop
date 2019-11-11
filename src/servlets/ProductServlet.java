@@ -32,10 +32,10 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-        int id = Integer.parseInt(req.getParameter("id"));
-        product = productService.findProductBy(id);
+        int productId = Integer.parseInt(req.getParameter("id"));
+        product = productService.findProductBy(productId);
         session.setAttribute("product", product);
-        Map<Comment, Customer> comments = commentService.findCommentBy(product.getId());
+        Map<Comment, Customer> comments = commentService.findCommentBy(productId);
         session.setAttribute("comments", comments);
         try {
             req.getServletContext().getRequestDispatcher("/jsp/product.jsp").forward(req,resp);

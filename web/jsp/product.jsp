@@ -56,7 +56,6 @@
     <li><a class="tabs" href="/catalog">Каталог</a></li>
     <li><a class="tabs" href="/novelties">Новинки</a></li>
     <li><a class="tabs" href="/sale">Распродажа</a></li>
-    <li><a class="tabs" href="/delivery">Доставка</a></li>
     <li style="float:right"><img class="logo" src="../pictures/logo.png" width="240px" height="60px" ></li>
     <li><a class="navicons" href="/profile"><img src="../pictures/prof.png"></a></li>
     <li><img src="../pictures/empty.png" width="40px" alt="empty"></li>
@@ -113,7 +112,12 @@
         <div class="form-inner">
             <form method="post" action="/comment">
                 <h3>Добавить комментарий</h3>
-                <input type="text"  placeholder="Имя">
+                <c:if test="${currentUser != null}">
+                    <input type="text" value="${currentUser.getFirstName()}">
+                </c:if>
+                <c:if test="${currentUser == null}">
+                    <input type="text"  placeholder="Имя">
+                </c:if>
                 <textarea id="text" placeholder="Ваш отзыв. . ." rows="3"></textarea>
                 <input type="button" onclick="send_comment(${product.getId()})" value="Отправить">
             </form>

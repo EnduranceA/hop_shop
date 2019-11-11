@@ -6,20 +6,33 @@ public class Comment {
 
     private int id;
     private int customerId;
+    private int productId;
     private Timestamp time;
     private String text;
 
-    public Comment(int id, int customerId, Timestamp time, String text) {
+    public Comment(int id, int customerId, int productId, Timestamp time, String text) {
         this.id = id;
         this.customerId = customerId;
+        this.productId = productId;
         this.time = time;
+        this.time = new Timestamp(System.currentTimeMillis());
         this.text = text;
     }
 
-    public Comment(int customerId, Timestamp time, String text) {
+    public Comment(int customerId, int productId, Timestamp time, String text) {
         this.customerId = customerId;
+        this.productId = productId;
         this.time = time;
+        this.time = new Timestamp(System.currentTimeMillis());
         this.text = text;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public int getId() {

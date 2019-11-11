@@ -3,6 +3,7 @@ package repositories;
 import helpers.ConnectionClass;
 import models.Comment;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommentRepositoryImpl implements CommentRepository {
@@ -18,7 +19,7 @@ public class CommentRepositoryImpl implements CommentRepository {
             "VALUES (?, ?, ?) reurning id;";
 
     //language=SQL
-    private String SQL_FIND_COMMENTS = "SELECT * FROM comment WHERE id = ?;";
+    private String SQL_FIND_COMMENTS = "SELECT * FROM comment WHERE product_id = ?;";
 
     @Override
     public List<Comment> findAll() {
@@ -31,7 +32,8 @@ public class CommentRepositoryImpl implements CommentRepository {
             Integer customerId = row.getInt("customer_id");
             Timestamp time = row.getTimestamp("time");
             String text = row.getString("text");
-            return new Comment(id, customerId, time, text);
+            int productId = row.getInt("product_id");
+            return new Comment(id, customerId, productId, time, text);
         }catch (SQLException e){
             throw new IllegalArgumentException(e);
         }
@@ -53,11 +55,11 @@ public class CommentRepositoryImpl implements CommentRepository {
         }
     }
 
-    public List<Comment> findCommentsBy(int id) {
-        List<Comment> comments = null;
+    public List<Comment> findCommentsBy(int productId) {
+        List<Comment> comments = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(SQL_FIND_COMMENTS);
-            st.setInt(1, id);
+            st.setInt(1, productId);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 comments.add(commentsRowMapper.mapRow(rs));

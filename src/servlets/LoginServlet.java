@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-        List<Product> basket;
+        List<Product> basket = new ArrayList<>();
         Customer user = (Customer) session.getAttribute("currentUser");
         try {
             if (user != null) {

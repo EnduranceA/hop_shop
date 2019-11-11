@@ -35,7 +35,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     private String SQL_FIND_PRODUCTS_BY_TYPES = "SELECT * FROM product WHERE format = ? AND color = ? AND size = ?;";
 
     //language=SQL
-    private String SQL_FIND_BASKET = "SELECT * FROM product WHERE (SELECT * basket WHERE id_custome = ?);";
+    private String SQL_FIND_BASKET = "SELECT * FROM product WHERE id IN(SELECT product_id FROM basket WHERE customer_id = ?);";
 
     @Override
     public void save(Product product) {
@@ -142,7 +142,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         return newItems;
     }
     public List<Product> findBasket(int id) {
-        List<Product> basket = new ArrayList<>();
+        List<Product> basket = null;
         try {
             PreparedStatement st = connection.prepareStatement(SQL_FIND_BASKET);
             st.setInt(1, id);
@@ -150,10 +150,10 @@ public class ProductRepositoryImpl implements ProductRepository {
             while (rs.next()) {
                 basket.add(productsRowMapper.mapRow(rs));
             }
+            return basket;
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
-        return basket;
     }
 
 }

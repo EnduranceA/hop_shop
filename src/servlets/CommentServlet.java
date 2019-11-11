@@ -34,11 +34,12 @@ public class CommentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
         HttpSession session = req.getSession();
+        int idProduct = Integer.parseInt(req.getParameter("productId"));
         Customer customer = (Customer) session.getAttribute("currentUser");
         int idCustomer = customer.getId();
         Timestamp time = new Timestamp(System.currentTimeMillis());
         String text = req.getParameter("text");
-        Comment comment = new Comment(idCustomer, time, text);
+        Comment comment = new Comment(idCustomer,idProduct, time, text);
         commentService.add(comment);
         JSONObject jo = new JSONObject();
         jo.put("comments", comment);
