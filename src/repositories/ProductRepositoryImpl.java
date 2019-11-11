@@ -29,7 +29,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     private String SQL_FIND_PRODUCT_BY_ID = "SELECT * FROM product WHERE id = ?;";
 
     //private=SQL
-    private String SQL_FIND_NEW_ITEMS = "SELECT * FROM product where time > CURRENT_TIMESTAMP - interval '100 hours';";
+    private String SQL_FIND_NEW_ITEMS = "SELECT * FROM product where time > CURRENT_TIMESTAMP - interval '500 hours';";
 
     //language=SQL
     private String SQL_FIND_PRODUCTS_BY_TYPES = "SELECT * FROM product WHERE format = ? AND color = ? AND size = ?;";
