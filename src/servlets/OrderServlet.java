@@ -53,6 +53,7 @@ public class OrderServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response){
+        try {
         Address address = new Address(request.getParameter("area"), request.getParameter("region"),
                 request.getParameter("locality"), request.getParameter("street"),
                 Integer.parseInt(request.getParameter("home_number")),Integer.parseInt(request.getParameter("apartment")) );
@@ -61,6 +62,12 @@ public class OrderServlet extends HttpServlet {
             Booking booking = new Booking(customer.getId(),product.getPrice(),1, address.getId(),
                     request.getParameter("payment"), Integer.parseInt(request.getParameter("delivery")));
             bookingService.addBooking(booking);
+            request.setAttribute("booking", booking);
+
+        }
+        request.getServletContext().getRequestDispatcher("/successful_order").forward(request, response);
+        } catch (ServletException | IOException e) {
+            throw new IllegalArgumentException(e);
         }
 
     }
