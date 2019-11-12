@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ProductRepositoryImpl implements ProductRepository {
 
-    Connection connection;
+    private Connection connection;
 
     public ProductRepositoryImpl() {
         this.connection = ConnectionClass.getConnection();
@@ -29,13 +29,16 @@ public class ProductRepositoryImpl implements ProductRepository {
     private String SQL_FIND_PRODUCT_BY_ID = "SELECT * FROM product WHERE id = ?;";
 
     //private=SQL
-    private String SQL_FIND_NEW_ITEMS = "SELECT * FROM product where time > CURRENT_TIMESTAMP - interval '500 hours';";
+    private String SQL_FIND_NEW_ITEMS = "SELECT * FROM product where time > CURRENT_TIMESTAMP - interval '300 hours';";
 
     //language=SQL
     private String SQL_FIND_PRODUCTS_BY_TYPES = "SELECT * FROM product WHERE format = ? AND color = ? AND size = ?;";
 
     //language=SQL
     private String SQL_FIND_BASKET = "SELECT * FROM product WHERE id IN(SELECT product_id FROM basket WHERE customer_id = ?);";
+
+    //language=SQL
+    private String SQL_FIND_SALE = "SELECT * FROM product WHERE id IN (SELECT id_product FROM  sale);";
 
     @Override
     public void save(Product product) {
@@ -156,4 +159,17 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
     }
 
+    public List<Product> findProductOfSale() {
+        List<Product> sale = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_SALE);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                sale.add(productsRowMapper.mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return sale;
+    }
 }

@@ -50,4 +50,8 @@ public class ProductService {
         }
         return products;
     }
+
+    public List<Product> findSale() {
+        return productRepository.findProductOfSale();
+    }
 }
