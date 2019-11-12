@@ -815,9 +815,8 @@ input:focus {
     margin-right: 20px;
 }
 
-
 .order-form {
-    width: 1320px;
+    width: 1600px;
     margin-left: 100px;
 }
 
@@ -857,12 +856,20 @@ input:focus {
 .order_text {
     margin-top: 10px;
     padding-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     margin-left: 100px;
     font-size: 30px;
     color: #55286F;
 }
 
+.order_list {
+    display: inline-block;
+}
+
+.order-item {
+    margin-left: 0;
+    margin-top: 10px;
+}
 /*checkboxes*/
 .checkbox {
     display: block;
