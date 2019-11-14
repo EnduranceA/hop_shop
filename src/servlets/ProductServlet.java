@@ -36,7 +36,7 @@ public class ProductServlet extends HttpServlet {
         product = productService.findProductBy(productId);
         session.setAttribute("product", product);
         Map<Comment, Customer> comments = commentService.findCommentBy(productId);
-        session.setAttribute("comments", comments);
+        req.setAttribute("comments", comments);
         try {
             req.getServletContext().getRequestDispatcher("/jsp/product.jsp").forward(req,resp);
         } catch (ServletException | IOException e) {
@@ -54,7 +54,6 @@ public class ProductServlet extends HttpServlet {
         }
         if (customer != null) {
             basket.add(product);
-            //добавить продукт в корзину(basket_product)
             productService.addProductToBasket(customer.getId(), product.getId());
         }
         else {
