@@ -93,7 +93,7 @@
                         <input type="submit" class="floated" value="Заказать">
                     </form>
                     <div id="buttonchik">
-                        <input type="button" class="floated" id="addToBasket" value="В корзину" onclick=f(${product.getId()})>
+                        <input type="button" class="floated" id="addToBasket" value="В корзину" onclick="f(${product.getId()})">
                     </div>
                 </div>
             </div>

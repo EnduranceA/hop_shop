@@ -8,10 +8,7 @@ import services.CustomerService;
 import services.ProductService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -50,13 +47,19 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         List<Product> basket;
+        String login = req.getParameter("mail");
         Customer user = (Customer) session.getAttribute("currentUser");
+        if (req.getParameter("remember") != null) {
+            Cookie cookie = new Cookie("login", login);
+            cookie.setMaxAge(60 * 60 * 24 * 14);
+            resp.addCookie(cookie);
+        }
         try {
             if (user != null) {
                 resp.sendRedirect("/profile");
             }
             else {
-                Customer customer = customerService.findCustomerBy(req.getParameter("mail"));
+                Customer customer = customerService.findCustomerBy(login);
                 if (encoder.matches(req.getParameter("password"), customer.getPassword())) {
                     session.setAttribute("currentUser", customer);
                     basket = productService.findBasket(customer.getId());

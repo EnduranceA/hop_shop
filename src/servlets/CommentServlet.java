@@ -20,6 +20,8 @@ public class CommentServlet extends HttpServlet {
 
     private ProductService productService;
     private CommentService commentService;
+    private int idProduct;
+    private int idCustomer;
 
     @Override
     public void init() {
@@ -28,22 +30,26 @@ public class CommentServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-
+        idProduct = Integer.parseInt(req.getParameter("id"));
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
         HttpSession session = req.getSession();
-        int idProduct = Integer.parseInt(req.getParameter("productId"));
         Customer customer = (Customer) session.getAttribute("currentUser");
-        int idCustomer = customer.getId();
+        if (customer != null) {
+            idCustomer = customer.getId();
+        }
+        else {
+            idCustomer = 0;
+        }
         Timestamp time = new Timestamp(System.currentTimeMillis());
         String text = req.getParameter("text");
-        Comment comment = new Comment(idCustomer,idProduct, time, text);
+        Comment comment = new Comment(idCustomer, idProduct, time, text);
         commentService.add(comment);
         JSONObject jo = new JSONObject();
         jo.put("comments", comment);
-        jo.put("user", customer);
+        jo.put("customer", customer);
         resp.setContentType("text/json");
         try {
             resp.getWriter().write(jo.toString());

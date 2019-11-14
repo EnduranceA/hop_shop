@@ -26,6 +26,13 @@
                 e.preventDefault();
             });
         });
+        
+        function f() {
+            var check = null;
+            if (remember.checked == true) {
+                check = remember.value;
+            }
+        }
     </script>
 </head>
 <body>
@@ -52,11 +59,11 @@
             <input type="password" id="form_password" name="password" placeholder=" Пароль">
         </div>
         <div class="answer_box">
-            <input type="checkbox" id="remember">
-            <label for="remember">Запомнить меня</label>
+            <input type="checkbox" name="remember" id="rem" value="rememberMe">
+            <label for="rem">Запомнить меня</label>
         </div>
         <div class="form-row-auth">
-            <input type="submit" id="vhod_btn" value="Войти">
+            <input type="submit" id="vhod_btn" value="Войти" onclick="f()">
         </div>
         <a href="/registration" class="btn_to_reg">Зарегистрироваться</a>
     </form>

@@ -15,6 +15,30 @@
     <meta charset="UTF-8">
     <title>Корзина</title>
     <link rel="stylesheet" href="../css_files/main.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.minus-btn').click(function(e){
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $this.closest('div').find('input');
+                var value = parseInt($input.val());
+                if(value > 1){value = value - 1;}
+                else{value = 0;}
+                $input.val(value);
+            });
+
+            $('.plus-btn').click(function(e){
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $this.closest('div').find('input');
+                var value = parseInt($input.val());
+                if(value < 100){value = value + 1;}
+                else{value = 100;}
+                $input.val(value);
+            });
+        });
+    </script>
 </head>
 <body>
 <!--navigation bar-->
@@ -90,30 +114,5 @@
         </div>
     </div>
 </footer>
-
-<script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('.minus-btn').click(function(e){
-            e.preventDefault();
-            var $this = $(this);
-            var $input = $this.closest('div').find('input');
-            var value = parseInt($input.val());
-            if(value > 1){value = value - 1;}
-            else{value = 0;}
-            $input.val(value);
-        });
-
-        $('.plus-btn').click(function(e){
-            e.preventDefault();
-            var $this = $(this);
-            var $input = $this.closest('div').find('input');
-            var value = parseInt($input.val());
-            if(value < 100){value = value + 1;}
-            else{value = 100;}
-            $input.val(value);
-        });
-    });
-</script>
 </body>
 </html>
