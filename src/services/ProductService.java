@@ -29,8 +29,11 @@ public class ProductService {
     public List<Product> getProductsByTypes(String format, String color, String size) {
         return productRepository.getProductsByTypes(format, color, size);
     }
-    public List<Product> findBasket(int id) {
-        return productRepository.findBasket(id);
+    public List<Product> findBasket(int customerId) {
+        if (productRepository.isExistBasket(customerId)) {
+            return productRepository.findBasket(customerId);
+        }
+        return new ArrayList<>();
     }
 
     public List<Product> getNovelties() {
@@ -53,5 +56,9 @@ public class ProductService {
 
     public List<Product> findSale() {
         return productRepository.findProductOfSale();
+    }
+
+    public void addProductToBasket(int customerId, int productId) {
+        productRepository.addNewProductToBasket(customerId, productId);
     }
 }

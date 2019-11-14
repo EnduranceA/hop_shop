@@ -37,6 +37,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     //language=SQL
     private String SQL_FIND_SALE = "SELECT * FROM product WHERE id IN (SELECT id_product FROM  sale);";
 
+    //language=SQL
+    private String SQL_ADD_PRODUCT_TO_BASKET = "INSERT INTO basket (customer_id, product_id) VALUES (?, ?);";
+
+    //language=SQL
+    private String SQL_CHECK_BASKET = "SELECT * FROM basket WHERE customer_id = ?;";
+
     @Override
     public void save(Product product) {
         try {
@@ -146,8 +152,9 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
         return newItems;
     }
+
     public List<Product> findBasket(int id) {
-        List<Product> basket = null;
+        List<Product> basket = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(SQL_FIND_BASKET);
             st.setInt(1, id);
@@ -173,5 +180,27 @@ public class ProductRepositoryImpl implements ProductRepository {
             throw new IllegalArgumentException(e);
         }
         return sale;
+    }
+
+    public void addNewProductToBasket(int customerId, int productId) {
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_ADD_PRODUCT_TO_BASKET);
+            st.setInt(1, customerId);
+            st.setInt(2, productId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public boolean isExistBasket(int customerId) {
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_CHECK_BASKET);
+            st.setInt(1, customerId);
+            ResultSet rs = st.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 }

@@ -11,8 +11,7 @@ public class AddressService {
         this.addressRepository = new AddressRepositoryImpl();
     }
 
-
-    public void addAddress(Address address) {
+    public void add(Address address) {
         if (!addressRepository.isExist(address)) {
             addressRepository.save(address);
         }

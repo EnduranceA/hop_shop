@@ -56,7 +56,7 @@ public class OrderServlet extends HttpServlet {
         Address address = new Address(request.getParameter("area"), request.getParameter("region"),
                 request.getParameter("locality"), request.getParameter("street"),
                 Integer.parseInt(request.getParameter("home_number")),Integer.parseInt(request.getParameter("apartment")) );
-        addressService.addAddress(address);
+        addressService.add(address);
 
         Booking booking = new Booking(customer.getId(),product.getPrice(),1, address.getId(),
                 request.getParameter("payment"), request.getParameter("delivery"),

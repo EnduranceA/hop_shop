@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/login")
@@ -50,7 +49,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-        List<Product> basket = new ArrayList<>();
+        List<Product> basket;
         Customer user = (Customer) session.getAttribute("currentUser");
         try {
             if (user != null) {
@@ -65,8 +64,6 @@ public class LoginServlet extends HttpServlet {
                     resp.sendRedirect("/profile");
                 }
                 else {
-                    basket = new ArrayList<>();
-                    session.setAttribute("basket", basket);
                     req.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
                 }
             }

@@ -106,7 +106,7 @@
                     <span class="price">₽ ${tr.getPrice()}</span>
                     <div class="actions">
                         <!--<a href="" class="cart-button">В корзину</a>-->
-                        <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
+                        <input type="button" name="go-to-basket" class="btns bask" value="В корзину" >
                         <!--<a href="" class="wishlist">В избранное</a>-->
                         <input type="button" name="add-to-fav" class="btns fav" value="В избранное">
                     </div>

@@ -10,7 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Корзина</title>
@@ -58,10 +58,10 @@
                             </div>
                         </div>
                     </div>
+                </c:forEach>
                     <form action="/order">
                         <button class="ctlg_button">Оформить заказ</button>
                     </form>
-                </c:forEach>
             </c:when>
             <c:otherwise>
                 <div class="emptybasket">

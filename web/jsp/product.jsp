@@ -16,10 +16,19 @@
     <link rel="stylesheet" href="../css_files/main.css">
     <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
     <script type="text/javascript">
-        function f() {
+        function f(product_id) {
             $.ajax ({
                 type:"POST",
-
+                url: "/product",
+                data: {
+                    "product_id" : product_id
+                },
+                success: function () {
+                    $("#buttonchik").html("");
+                    $('#buttonchik').append(
+                        "<input type=\"button\" class=\"floated\" id=\"addToBasket\"  value=\"Добавлено\" >"
+                    )
+                }
             })
         }
         function send_comment(product_id) {
@@ -83,7 +92,9 @@
                     <form action="/order?booking=${booking.getId()}">
                         <input type="submit" class="floated" value="Заказать">
                     </form>
-                    <input type="submit" class="floated" name="toshopbasket"  value="В корзину" onclick=f()>
+                    <div id="buttonchik">
+                        <input type="button" class="floated" id="addToBasket" value="В корзину" onclick=f(${product.getId()})>
+                    </div>
                 </div>
             </div>
         </div>

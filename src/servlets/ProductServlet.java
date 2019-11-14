@@ -46,23 +46,20 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            HttpSession session = req.getSession();
-            Customer customer = (Customer) session.getAttribute("currentUser");
-            List<Product> basket = (List<Product>) session.getAttribute("basket");
-            if (customer != null) {
-                basket.add(product);
-                //добавить продукт в корзину(basket_product)
-            }
-            else {
-                if (basket == null) {
-                    basket = new ArrayList<>();
-                }
-                basket.add(product);
-            }
-            req.getServletContext().getRequestDispatcher("/jsp/order.jsp").forward(req,resp);
-        } catch (ServletException |IOException e) {
-            throw new IllegalArgumentException(e);
+        HttpSession session = req.getSession();
+        Customer customer = (Customer) session.getAttribute("currentUser");
+        List<Product> basket = (List<Product>) session.getAttribute("basket");
+        if (basket == null) {
+            basket = new ArrayList<>();
         }
+        if (customer != null) {
+            basket.add(product);
+            //добавить продукт в корзину(basket_product)
+            productService.addProductToBasket(customer.getId(), product.getId());
+        }
+        else {
+            basket.add(product);
+        }
+        session.setAttribute("basket", basket);
     }
 }

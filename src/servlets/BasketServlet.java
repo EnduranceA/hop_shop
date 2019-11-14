@@ -23,9 +23,9 @@ public class BasketServlet extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             Customer customer = (Customer) session.getAttribute("currentUser");
-            List<Product> products = (List<Product>) session.getAttribute("basket");
+            List<Product> basket = (List<Product>) session.getAttribute("basket");
             request.setAttribute("customer", customer);
-            request.setAttribute("basket", products);
+            request.setAttribute("basket", basket);
             request.getServletContext().getRequestDispatcher("/jsp/basket.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             throw new IllegalArgumentException(e);
