@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: DEEGER
@@ -7,8 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Оформление заказа</title>
@@ -30,18 +30,17 @@
 <div class="order_container">
     <p class="order_text">Оформление заказа</p>
     <form class="order-form"  enctype="multipart/form-data" action="" method="post">
-        <c:if test="${сustomer != null}">
-            <div class="form-row inline-infa">
-                <input type="text" id="form_lname" name="last_name" value="${customer.getFirstName()}">
-            </div>
-            <div class="form-row inline-infa">
-                <input type="text" id="form_fname" name="first_name" value="${customer.getLastName()}">
-            </div>
-            <div class="form-row inline-infa">
-                <input type="text" id="form_tname" name="patronymic" value="${customer.getPatronymic()}">
-            </div>
+        <div class="form-row inline-infa">
+            <input type="text" id="form_lname" name="last_name" value="${currentUser.getFirstName()}">
+        </div>
+        <div class="form-row inline-infa">
+            <input type="text" id="form_fname" name="first_name" value="${currentUser.getLastName()}">
+        </div>
+        <div class="form-row inline-infa">
+            <input type="text" id="form_tname" name="patronymic" value="${currentUser.getPatronymic()}">
+        </div>
         <div class="form-row phone">
-            <input type="text" id="form_phone" name="phone" required pattern="8[0-9]{10}" value="${customer.getPhoneNumber()}">
+            <input type="text" id="form_phone" name="phone" required pattern="8[0-9]{10}" value="${currentUser.getPhoneNumber()}">
         </div>
         <div class="form-row inline-infa">
             <input type="text" id="form_region" name="region" placeholder= "Область">
@@ -50,25 +49,25 @@
             <input type="text" id="form_area" name="area" placeholder= "Район">
         </div>
         <div class="form-row inline-infa">
-            <input type="text" id="form_city" name="city" placeholder= "Населенный пункт">
+            <input type="text" id="form_city" name="locality" placeholder= "Населенный пункт">
         </div>
         <br>
         <div class="form-row inline-infa">
             <input type="text" id="form_street" name="street" placeholder= "Улица">
         </div>
         <div class="form-row inline-infa">
-            <input type="text" id="form_building" name="building" placeholder= "Дом">
+            <input type="text" id="form_building" name="home_number" placeholder= "Дом">
         </div>
         <div class="form-row inline-infa">
-            <input type="text" id="form_flat" name="flat" placeholder= "Квартира">
+            <input type="text" id="form_flat" name="apartment" placeholder= "Квартира">
         </div>
         <p class="headline">Доставка</p>
         <label class="checkbox">Курьером
-            <input type="radio" checked="checked" name="dostavka" value="curier">
+            <input type="radio" checked="checked" name="delivery" value="Курьер">
             <span class="checkmark"></span>
         </label>
         <label class="checkbox">Самовывоз
-            <input type="radio" name="dostavka" value="samovivoz">
+            <input type="radio" name="delivery" value="Самовывоз">
             <span class="checkmark"></span>
         </label>
         <p class="headline">Способ оплаты</p>
@@ -91,11 +90,11 @@
         <p class="headline">Комментарий к заказу</p>
         <form class="decor">
             <div class="form-comment">
-                <textarea rows="3"></textarea>
+                <textarea name="info" rows="3"></textarea>
             </div>
         </form>
         <div class="form-row pay">
-            <form method="post" action="/order" >
+            <form method="get" action="/successful_order" >
                 <input type="submit" value="Оплатить">
             </form>
         </div>

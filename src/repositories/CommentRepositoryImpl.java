@@ -55,6 +55,11 @@ public class CommentRepositoryImpl implements CommentRepository {
         }
     }
 
+    @Override
+    public boolean isExist(Comment comment) {
+        return false;
+    }
+
     public List<Comment> findCommentsBy(int productId) {
         List<Comment> comments = new ArrayList<>();
         try {

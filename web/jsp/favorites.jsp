@@ -1,9 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: DEEGER
-  Date: 08.11.2019
-  Time: 22:22
+  Date: 12.11.2019
+  Time: 8:29
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,7 +10,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Распродажа</title>
+    <title>Избранное</title>
     <link rel="stylesheet" href="../css_files/main.css">
 </head>
 <body>
@@ -27,31 +26,33 @@
     <li><a class="navicons" href="/basket"><img src="../pictures/shopping_basket.png"></a></li>
 </ul>
 
-<div class="cont_catalog">
-    <p class="title_catalog">Распродажа</p>
-    <div class="container-fluid results">
-    <c:if test="${sale != null}">
-        <c:forEach var="tr" items="${sale}">
-            <div class="product-item">
-                <div class="product-img">
-                    <a href="/product?id=${tr.getId()}">
-                        <img src="${tr.getPathPhoto()}">
-                    </a>
-                </div>
-                <div class="product-list">
-                    <h3>${tr.getName()}</h3>
-                    <span class="price">₽ ${tr.getPrice()}</span>
-                    <div class="actions">
-                        <!--<a href="" class="cart-button">В корзину</a>-->
-                        <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
-                        <!--<a href="" class="wishlist">В избранное</a>-->
-                        <input type="button" name="add-to-fav" class="btns fav" value="В избранное">
-                    </div>
+<div class="container">
+    <div class="widget">
+        <p class="lk_title">Личный кабинет</p>
+        <ul>
+            <li><a href="">Профиль</a></li>
+            <li><a href="">История покупок</a></li>
+            <li class="current"><a href="">Избранное</a></li>
+        </ul>
+    </div>
+    <div class="cont_elem">
+        <div class="product-item">
+            <div class="product-img">
+                <a href="">
+                    <img src="../pictures/tatu1.jpg">
+                </a>
+            </div>
+            <div class="product-list">
+                <h3>Тату раз</h3>
+                <span class="price">₽ 1999</span>
+                <div class="actions">
+                    <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
+                    <input type="button" name="delete-from-fav" class="btns fav" value="Удалить">
                 </div>
             </div>
-        </c:forEach>
-    </c:if>
+        </div>
     </div>
+
 </div>
 
 <!--здесь типа футер-->

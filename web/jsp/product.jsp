@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="../css_files/main.css">
     <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
     <script type="text/javascript">
+        function f() {
+            $.ajax ({
+                type:"POST",
+
+            })
+        }
         function send_comment(product_id) {
             $.ajax({
                 type: "POST",
@@ -74,12 +80,10 @@
                 <p style="color:#55286F ">В наличии: ${product.getCount()}</p>
                 <div class="text-info">${product.getDescription()} </div>
                 <div class="buttons">
-                    <form>
-                        <input type="button" class="floated" name="order" value="Заказать">
+                    <form action="/order?booking=${booking.getId()}">
+                        <input type="submit" class="floated" value="Заказать">
                     </form>
-                    <form>
-                        <input type="button" class="floated" name="toshopbasket"  value="В корзину">
-                    </form>
+                    <input type="submit" class="floated" name="toshopbasket"  value="В корзину" onclick=f()>
                 </div>
             </div>
         </div>

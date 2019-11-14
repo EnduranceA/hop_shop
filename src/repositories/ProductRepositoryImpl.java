@@ -3,10 +3,7 @@ package repositories;
 import helpers.ConnectionClass;
 import models.Product;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +60,11 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     }
 
+    @Override
+    public boolean isExist(Product product) {
+        return false;
+    }
+
     public RowMapper<Product> productsRowMapper = row -> {
         try{
             Integer id = row.getInt("id");
@@ -71,7 +73,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             Integer price = row.getInt("price");
             Integer count = row.getInt("count");
             String pathPhoto = row.getString("path_photo");
-            String time = row.getString("time");
+            Timestamp time = row.getTimestamp("time");
             String size = row.getString("size");
             String color = row.getString("color");
             String format = row.getString("format");

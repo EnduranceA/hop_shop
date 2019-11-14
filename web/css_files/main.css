@@ -476,14 +476,13 @@ footer .container {
     width: 700px;
     color: #55286F;
 }
-
 .floated {
     float: left;
     margin-right: 20px;
     margin-top: 20px;
 }
 
-.buttons input[type=button] {
+.buttons input[type="submit"] {
     height: 50px;
     width: 130px;
     border: none;
@@ -496,7 +495,7 @@ footer .container {
     margin-bottom: 30px;
 }
 
-.buttons input[type=button]:hover {
+.buttons input[type="submit"]:hover {
     background-color: #66257d;
 }
 

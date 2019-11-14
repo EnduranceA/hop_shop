@@ -93,6 +93,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     }
 
+    @Override
+    public boolean isExist(Customer customer) {
+        return false;
+    }
+
 
     @Override
     public List<Customer> findAll() {

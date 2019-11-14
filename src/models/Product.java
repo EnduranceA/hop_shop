@@ -16,14 +16,14 @@ public class Product {
     private String format;
 
     public Product(int id, String name, String description, int price,
-                   int count, String pathPhoto, String time, String size, String color, String format) {
+                   int count, String pathPhoto, Timestamp time, String size, String color, String format) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.count = count;
         this.pathPhoto = pathPhoto;
-        this.time = new Timestamp(System.currentTimeMillis());
+        this.time = time;
         this.size = size;
         this.color = color;
         this.format = format;

@@ -1,9 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: DEEGER
-  Date: 08.11.2019
-  Time: 22:22
+  Date: 12.11.2019
+  Time: 8:26
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,7 +10,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Распродажа</title>
+    <title>История покупок</title>
+    <link rel="stylesheet" href="../css_files/footer.css">
     <link rel="stylesheet" href="../css_files/main.css">
 </head>
 <body>
@@ -27,33 +27,34 @@
     <li><a class="navicons" href="/basket"><img src="../pictures/shopping_basket.png"></a></li>
 </ul>
 
-<div class="cont_catalog">
-    <p class="title_catalog">Распродажа</p>
-    <div class="container-fluid results">
-    <c:if test="${sale != null}">
-        <c:forEach var="tr" items="${sale}">
-            <div class="product-item">
-                <div class="product-img">
-                    <a href="/product?id=${tr.getId()}">
-                        <img src="${tr.getPathPhoto()}">
-                    </a>
-                </div>
-                <div class="product-list">
-                    <h3>${tr.getName()}</h3>
-                    <span class="price">₽ ${tr.getPrice()}</span>
-                    <div class="actions">
-                        <!--<a href="" class="cart-button">В корзину</a>-->
-                        <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
-                        <!--<a href="" class="wishlist">В избранное</a>-->
-                        <input type="button" name="add-to-fav" class="btns fav" value="В избранное">
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-    </c:if>
+<div class="container">
+    <div class="widget">
+        <p class="lk_title">Личный кабинет</p>
+        <ul>
+            <li><a href="">Профиль</a></li>
+            <li class="current"><a href="">История покупок</a></li>
+            <li><a href="">Избранное</a></li>
+        </ul>
     </div>
-</div>
+    <div class="cont_elem">
+        <div class="element">
+            <div class="item-info">
+                <img src="../pictures/tatu2.png" alt="tatu">
+            </div>
+            <div class="item-info">
+                <p class="item_name">Tatu 2</p>
+                <p class="order_number">Номер заказа: <span style="font-weight: bold">329010</span></p>
+            </div>
+            <div class="item-info right-info">
+                <p class="order_price">₽ 1000</p>
+                <!--если заказ завершен, добавляем класс completed
+                если в обработке - processing, заказ отправлен - ontheway -->
+                <p class="order_status completed">Завершен</p>
+            </div>
+        </div>
+    </div>
 
+</div>
 <!--здесь типа футер-->
 <footer>
     <div class="container">

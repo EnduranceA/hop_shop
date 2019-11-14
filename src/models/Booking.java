@@ -11,10 +11,11 @@ public class Booking {
     private int idStatus;
     private int idAddress;
     private String payment;
-    private int idDelivery;
+    private String delivery;
+    private String info;
 
     public Booking(int id, int idCustomer, Timestamp time, int amount,
-                   int idStatus, int idAddress, String payment, int idDelivery) {
+                   int idStatus, int idAddress, String payment, String delivery, String info) {
         this.id = id;
         this.idCustomer = idCustomer;
         this.time = time;
@@ -22,17 +23,19 @@ public class Booking {
         this.idStatus = idStatus;
         this.idAddress = idAddress;
         this.payment = payment;
-        this.idDelivery = idDelivery;
+        this.delivery = delivery;
+        this.info = info;
     }
 
     public Booking(int idCustomer, int amount, int idStatus,
-                   int idAddress, String payment, int idDelivery) {
+                   int idAddress, String payment, String delivery, String info) {
         this.idCustomer = idCustomer;
         this.amount = amount;
         this.idStatus = idStatus;
         this.idAddress = idAddress;
         this.payment = payment;
-        this.idDelivery = idDelivery;
+        this.delivery = delivery;
+        this.info = info;
     }
 
     public int getId() {
@@ -91,11 +94,19 @@ public class Booking {
         this.payment = payment;
     }
 
-    public int getIdDelivery() {
-        return idDelivery;
+    public String getDelivery() {
+        return delivery;
     }
 
-    public void setIdDelivery(int idDelivery) {
-        this.idDelivery = idDelivery;
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

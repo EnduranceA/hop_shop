@@ -18,8 +18,8 @@ public class BookingRepositoryImpl implements BookingRepository {
     private final String SQL_FIND_ALL = "SELECT *FROM booking;";
 
     //language=SQL
-    private final String SQL_INSERT_BOOKING = "INSERT INTO booking (id_customer, time, amount, id_status, id_address, payment, id_delivery) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?);";
+    private final String SQL_INSERT_BOOKING = "INSERT INTO booking (id_customer, time, amount, id_status, id_address, payment, delivery, info) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?) returning id;";
 
     public RowMapper<Booking> bookingRowMapper = row -> {
         try{
@@ -30,9 +30,10 @@ public class BookingRepositoryImpl implements BookingRepository {
             Integer idStatus = row.getInt("id_status");
             Integer idAddress = row.getInt("id_address");
             String payment = row.getString("payment");
-            Integer idDelivery = row.getInt("id_delivery");
+            String delivery = row.getString("delivery");
+            String info = row.getString("info");
             return new Booking(id, idCustomer, time, amount, idStatus, idAddress,
-                    payment, idDelivery);
+                    payment, delivery, info);
         }catch (SQLException e){
             throw new IllegalArgumentException(e);
         }
@@ -62,7 +63,8 @@ public class BookingRepositoryImpl implements BookingRepository {
             st.setInt(4, booking.getIdStatus());
             st.setInt(5, booking.getIdAddress());
             st.setString(6,booking.getPayment());
-            st.setInt(7, booking.getIdDelivery());
+            st.setString(7, booking.getDelivery());
+            st.setString(8, booking.getInfo());
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 booking.setId(rs.getInt("id"));
@@ -70,5 +72,10 @@ public class BookingRepositoryImpl implements BookingRepository {
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    @Override
+    public boolean isExist(Booking booking) {
+        return false;
     }
 }

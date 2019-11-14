@@ -33,20 +33,19 @@ public class OrderServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response){
-        product = productService.findProductBy(
-                Integer.parseInt(request.getParameter("id")));
+//        product = productService.findProductBy(
+//                Integer.parseInt(request.getParameter("id")));
         try {
             //проверить авторизован ли пользователь
             customer = (Customer) request.getSession().getAttribute("currentUser");
             if (customer != null) {
-                request.setAttribute("customer", customer);
                 request.getServletContext().getRequestDispatcher("/jsp/order.jsp").forward(request, response);
             }
             else {
-                request.getServletContext().getRequestDispatcher("/jsp/registration.jsp").forward(request, response);
+                response.sendRedirect("/login");
             }
         }
-        catch (ServletException|IOException  e) {
+        catch (IOException | ServletException e) {
             throw new IllegalArgumentException(e);
         }
 
@@ -58,13 +57,14 @@ public class OrderServlet extends HttpServlet {
                 request.getParameter("locality"), request.getParameter("street"),
                 Integer.parseInt(request.getParameter("home_number")),Integer.parseInt(request.getParameter("apartment")) );
         addressService.addAddress(address);
-        if (customer != null) {
-            Booking booking = new Booking(customer.getId(),product.getPrice(),1, address.getId(),
-                    request.getParameter("payment"), Integer.parseInt(request.getParameter("delivery")));
-            bookingService.addBooking(booking);
-            request.setAttribute("booking", booking);
 
-        }
+        Booking booking = new Booking(customer.getId(),product.getPrice(),1, address.getId(),
+                request.getParameter("payment"), request.getParameter("delivery"),
+                request.getParameter("info"));
+
+        bookingService.addBooking(booking);
+
+        request.setAttribute("booking", booking);
         request.getServletContext().getRequestDispatcher("/successful_order").forward(request, response);
         } catch (ServletException | IOException e) {
             throw new IllegalArgumentException(e);

@@ -9,6 +9,17 @@ public class Address {
     private int homeNumber;
     private int apartment;
 
+    public Address(int id, String area, String region, String locality,
+                   String street, int homeNumber, int apartment) {
+        this.id = id;
+        this.area = area;
+        this.region = region;
+        this.locality = locality;
+        this.street = street;
+        this.homeNumber = homeNumber;
+        this.apartment = apartment;
+    }
+
     public Address(String area, String region,
                    String locality, String street, int homeNumber, int apartment) {
         this.area = area;
