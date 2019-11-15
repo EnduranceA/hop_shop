@@ -61,4 +61,8 @@ public class ProductService {
     public void addProductToBasket(int customerId, int productId) {
         productRepository.addNewProductToBasket(customerId, productId);
     }
+
+    public void delete(int productId, int customerId) {
+        productRepository.removeProductFromBasket(productId, customerId);
+    }
 }

@@ -61,6 +61,11 @@ public class CommentRepositoryImpl implements CommentRepository {
         return false;
     }
 
+    @Override
+    public void remove(Comment comment) {
+
+    }
+
     public List<Comment> findCommentsBy(int productId) {
         List<Comment> comments = new ArrayList<>();
         try {

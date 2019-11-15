@@ -93,5 +93,10 @@ public class AddressRepositoryImpl implements AddressRepository {
         }
     }
 
+    @Override
+    public void remove(Address address) {
+
+    }
+
 
 }

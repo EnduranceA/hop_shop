@@ -78,4 +78,9 @@ public class BookingRepositoryImpl implements BookingRepository {
     public boolean isExist(Booking booking) {
         return false;
     }
+
+    @Override
+    public void remove(Booking booking) {
+
+    }
 }

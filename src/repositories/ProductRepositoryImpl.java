@@ -43,6 +43,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     //language=SQL
     private String SQL_CHECK_BASKET = "SELECT * FROM basket WHERE customer_id = ?;";
 
+    //language=SQL
+    private String SQL_DELETE_PRODUCT = "DELETE FROM basket WHERE customer_id = ? AND product_id = ?;";
+
     @Override
     public void save(Product product) {
         try {
@@ -70,6 +73,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     public boolean isExist(Product product) {
         return false;
     }
+
+
 
     public RowMapper<Product> productsRowMapper = row -> {
         try{
@@ -199,6 +204,22 @@ public class ProductRepositoryImpl implements ProductRepository {
             st.setInt(1, customerId);
             ResultSet rs = st.executeQuery();
             return rs.next();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    @Override
+    public void remove(Product product) {
+
+    }
+
+    public void removeProductFromBasket(int productId, int customerId) {
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_DELETE_PRODUCT);
+            st.setInt(1, customerId);
+            st.setInt(2, productId);
+            st.executeUpdate();
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }

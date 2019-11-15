@@ -38,6 +38,20 @@
                 $input.val(value);
             });
         });
+
+        function remove(id) {
+            document.getElementById(id).remove();
+        }
+
+        function delete_basket_product(id) {
+            $.ajax({
+                type: "POST",
+                url: "/basket",
+                data: {
+                    id: id
+                }
+            })
+        }
     </script>
 </head>
 <body>
@@ -48,7 +62,7 @@
     <p class="title_shop_basket">Корзина</p>
     <div class="container results">
         <c:choose>
-            <c:when test="${basket != null}">
+            <c:when test="${basket != null && !basket.isEmpty()}">
                 <c:forEach var="tr" items="${basket}">
                     <div class="product-item">
                         <div class="product-img">
@@ -69,7 +83,7 @@
                                 </button>
                             </div>
                             <div class="actions">
-                                <input type="button" name="delete-from-basket" class="bask_btn" value="Удалить из корзины">
+                                <input type="button" name="delete-from-basket" onclick="delete_basket_product(${tr.getId()}); remove(${tr.getId()})" class="bask_btn" value="Удалить из корзины">
                             </div>
                         </div>
                     </div>

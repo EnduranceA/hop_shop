@@ -98,6 +98,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return false;
     }
 
+    @Override
+    public void remove(Customer customer) {
+
+    }
+
 
     @Override
     public List<Customer> findAll() {
