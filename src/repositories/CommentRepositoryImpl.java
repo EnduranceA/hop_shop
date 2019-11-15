@@ -15,8 +15,8 @@ public class CommentRepositoryImpl implements CommentRepository {
     }
 
     //language=SQL
-    private String SQL_SAVE_COMMENT = "INSERT INTO comment (customer_id, time, text) " +
-            "VALUES (?, ?, ?) reurning id;";
+    private String SQL_SAVE_COMMENT = "INSERT INTO comment (customer_id, time, text, product_id) " +
+            "VALUES (?, ?, ?, ?) returning id;";
 
     //language=SQL
     private String SQL_FIND_COMMENTS = "SELECT * FROM comment WHERE product_id = ?;";
@@ -46,6 +46,7 @@ public class CommentRepositoryImpl implements CommentRepository {
             st.setInt(1, comment.getCustomerId());
             st.setTimestamp(2, comment.getTime());
             st.setString(3, comment.getText());
+            st.setInt(4, comment.getProductId());
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 comment.setId(rs.getInt("id"));

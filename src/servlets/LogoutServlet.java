@@ -16,6 +16,7 @@ public class LogoutServlet extends HttpServlet {
         loginCookie.setMaxAge(0);
         HttpSession session = request.getSession();
         session.removeAttribute("currentUser");
+        session.removeAttribute("basket");
         try {
             response.sendRedirect("/login");
         } catch (IOException e) {

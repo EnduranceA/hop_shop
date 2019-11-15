@@ -18,9 +18,9 @@
 <!--navigation bar-->
 <%@include file= "includes/navbar.jsp"%>
 
-    <div class="banner">
-        <img src="https://via.placeholder.com/2000x300?text=Full+Banner">
-    </div>-->
+    <%--<div class="banner">--%>
+        <%--<img src="https://via.placeholder.com/2000x300?text=Full+Banner">--%>
+    <%--</div>-->--%>
 
 <!--это новинки-->
 <div class="container-fluid new-items">

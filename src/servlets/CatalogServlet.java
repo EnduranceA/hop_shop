@@ -16,7 +16,7 @@ import java.util.List;
 @WebServlet("/catalog")
 public class CatalogServlet extends HttpServlet {
 
-    ProductService productService;
+    private ProductService productService;
 
     @Override
     public void init() {

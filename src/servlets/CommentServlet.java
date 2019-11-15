@@ -2,11 +2,13 @@ package servlets;
 
 import models.Comment;
 import models.Customer;
+import models.Product;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import services.CommentService;
 import services.ProductService;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,29 +32,28 @@ public class CommentServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        idProduct = Integer.parseInt(req.getParameter("id"));
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
         HttpSession session = req.getSession();
         Customer customer = (Customer) session.getAttribute("currentUser");
-        if (customer != null) {
-            idCustomer = customer.getId();
-        }
-        else {
-            idCustomer = 0;
-        }
+        Product product = (Product) session.getAttribute("product");
+        idCustomer = customer.getId();
+        idProduct = product.getId();
         Timestamp time = new Timestamp(System.currentTimeMillis());
         String text = req.getParameter("text");
         Comment comment = new Comment(idCustomer, idProduct, time, text);
         commentService.add(comment);
-        JSONObject jo = new JSONObject();
-        jo.put("comments", comment);
-        jo.put("customer", customer);
+
+        JSONArray array = new JSONArray();
+        array.put(new JSONObject(comment)); array.put(new JSONObject(customer));
+
+        JSONObject o = new JSONObject();
+        o.put("objects", array);
         resp.setContentType("text/json");
         try {
-            resp.getWriter().write(jo.toString());
+            resp.getWriter().write(o.toString());
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }

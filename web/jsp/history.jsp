@@ -22,10 +22,13 @@
     <div class="widget">
         <p class="lk_title">Личный кабинет</p>
         <ul>
-            <li><a href="">Профиль</a></li>
-            <li class="current"><a href="">История покупок</a></li>
-            <li><a href="">Избранное</a></li>
+            <li><a href="/profile">Профиль</a></li>
+            <li class="current"><a href="/history">История покупок</a></li>
+            <li><a href="/favorites">Избранное</a></li>
         </ul>
+        <form method="get" action="/logout" class="btn_logout">
+            <input type="submit" value="Выйти">
+        </form>
     </div>
     <div class="cont_elem">
         <div class="element">

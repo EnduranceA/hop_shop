@@ -22,8 +22,8 @@
         <p class="title_lk">Личный кабинет</p>
         <ul>
             <li class="current"><a href="/profile">Профиль</a></li>
-            <li><a href="">История покупок</a></li>
-            <li><a href="">Избранное</a></li>
+            <li><a href="/history">История покупок</a></li>
+            <li><a href="/favorites">Избранное</a></li>
         </ul>
         <form method="get" action="/logout" class="btn_logout">
             <input type="submit" value="Выйти">

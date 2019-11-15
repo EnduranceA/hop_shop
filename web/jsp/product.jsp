@@ -40,28 +40,26 @@
                     "product_id": product_id
                 },
                 dataType: "json",
-                success: function (msg, customer) {
+                success: function (msg) {
                     $('#table_comments').append(
-                        "<div class=\"comment\">\n" +
-                        "    <div class=\"cont2\">\n" +
-                        "        <img src=\"" + customer.getPathPhoto + "\">\n" +
-                        "    </div>\n" +
-                        "    <div class=\"cont2\">\n" +
-                        "        <div class=\"info\">\n" +
-                        "            <p class=\"username\">" + customer.getFirstName()
-                        + " " + customer.getLastName() + "</p>\n" +
-                        "            <p class=\"date\">" + msg.getTime() + "</p>\n" +
+                       "<div class=\"comment\">\n" +
+                        "                <div class=\"cont2\">\n" +
+                        "                    <img src=\"" + msg.objects[1].pathPhoto + "\">\n" +
+                        "                </div>\n" +
+                        "                <div class=\"cont2\">\n" +
+                        "                    <div class=\"info\">\n" +
+                        "                        <p class=\"username\">" + msg.objects[1].firstName +" " + msg.objects[1].lastName + "</p>\n" +
+                        "                        <p class=\"date\">" + msg.objects[0].time+ "</p>\n" +
                         "                        <div class=\"comment-text\">\n" +
-                                                       msg.getText() +
+                                                    msg.objects[0].text +
                         "                        </div>\n" +
-                        "        </div>\n" +
-                        "    </div>\n" +
-                        "</div>"
+                        "                    </div>\n" +
+                        "                </div>\n" +
+                        "            </div>"
                     )
                 }
             })
         }
-
     </script>
 </head>
 <body>
@@ -84,7 +82,7 @@
                         <input type="submit" class="floated" value="Заказать">
                     </form>
                     <div id="buttonchik">
-                        <input type="button" class="floated" id="addToBasket" value="В корзину" onclick="f(${product.getId()})">
+                        <input type="button" class="floated" id="addToBasket" value="В корзину" onclick=f(${product.getId()})>
                     </div>
                 </div>
             </div>
@@ -94,7 +92,6 @@
 <c:if test="${!comments.isEmpty()}">
 <div class="cont_item">
     <p id="title_item">Отзывы</p>
-    <div class="row" id="table_comments"></div>
         <c:forEach var="tr" items="${comments}">
             <div class="comment">
                 <div class="cont2">
@@ -112,11 +109,12 @@
             </div>
         </c:forEach>
     </c:if>
+    <div class="row" id="table_comments"></div>
     <c:if test="${currentUser != null}">
     <!--форма комментария-->
     <form class="decor">
         <div class="form-inner">
-            <form method="post" action="/comment">
+            <form method="post">
                 <h3>Добавить комментарий</h3>
                 <input type="text" value="${currentUser.getFirstName()}">
                 <textarea id="text" placeholder="Ваш отзыв. . ." rows="3"></textarea>
@@ -131,3 +129,19 @@
 </body>
 </html>
 
+
+<%--"<div class=\"comment\">\n" +--%>
+<%--"    <div class=\"cont2\">\n" +--%>
+    <%--"        <img src=\"" + msg.array[1].getPathPhoto() + "\">\n" +--%>
+    <%--"    </div>\n" +--%>
+<%--"    <div class=\"cont2\">\n" +--%>
+    <%--"        <div class=\"info\">\n" +--%>
+        <%--"            <p class=\"username\">" +  msg.array[1].getFirstName()--%>
+            <%--+ " " + msg.array[1].getLastName() + "</p>\n" +--%>
+        <%--"            <p class=\"date\">" +  msg.array[0].getTime() + "</p>\n" +--%>
+        <%--"                        <div class=\"comment-text\">\n" +--%>
+            <%--msg.array[0].text +--%>
+            <%--"                        </div>\n" +--%>
+        <%--"        </div>\n" +--%>
+    <%--"    </div>\n" +--%>
+<%--"</div>"--%>

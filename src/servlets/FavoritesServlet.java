@@ -23,7 +23,7 @@ public class FavoritesServlet extends HttpServlet {
         try {
             HttpSession session = req.getSession();
             Customer customer = (Customer) session.getAttribute("currentUser");
-            if (customer != null) {
+            if (customer == null) {
                 resp.sendRedirect("/login");
             }
             else {
