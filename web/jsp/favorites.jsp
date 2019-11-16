@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: DEEGER
@@ -12,6 +13,25 @@
     <meta charset="UTF-8">
     <title>Избранное</title>
     <link rel="stylesheet" href="../css_files/main.css">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        function f(product_id) {
+            $.ajax ({
+                type:"POST",
+                url: "/product",
+                data: {
+                    "product_id" : product_id
+                },
+                success: function () {
+                    $("#buttonchik").html("");
+                    $('#buttonchik').append(
+                        "<input type=\"button\" class=\"floated\" value=\"Добавлено\" >"
+                    )
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <!--navigation bar-->
@@ -30,21 +50,27 @@
         </form>
     </div>
     <div class="cont_elem">
-        <div class="product-item">
-            <div class="product-img">
-                <a href="">
-                    <img src="../pictures/tatu1.jpg">
-                </a>
-            </div>
-            <div class="product-list">
-                <h3>Тату раз</h3>
-                <span class="price">₽ 1999</span>
-                <div class="actions">
-                    <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
-                    <input type="button" name="delete-from-fav" class="btns fav" value="Удалить">
+        <c:if test="${favorites != null}">
+            <c:forEach var="tr" items="${favorites}">
+                <div class="product-item">
+                    <div class="product-img">
+                        <a href="/product?id=${tr.getId()}">
+                            <img src="${tr.getPathPhoto()}">
+                        </a>
+                    </div>
+                    <div class="product-list">
+                        <h3>${tr.getName()}</h3>
+                        <span class="price">₽ ${tr.getPrice()}</span>
+                        <div class="actions">
+                            <div id="buttonchik">
+                                <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
+                            </div>
+                            <input type="button" name="delete-from-fav" class="btns fav" value="Удалить">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </c:forEach>
+        </c:if>
     </div>
 
 </div>

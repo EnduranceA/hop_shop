@@ -13,6 +13,40 @@
     <meta charset="UTF-8">
     <title>Распродажа</title>
     <link rel="stylesheet" href="../css_files/main.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        function f(product_id) {
+            $.ajax ({
+                type:"POST",
+                url: "/product",
+                data: {
+                    "product_id" : product_id
+                },
+                success: function () {
+                    $("#buttonchik").html("");
+                    $('#buttonchik').append(
+                        "<input type=\"button\" class=\"floated\" id=\"addToBasket\"  value=\"Добавлено\" >"
+                    )
+                }
+            })
+        }
+
+        function add(product_id) {
+            $.ajax ({
+                type:"POST",
+                url: "/favorites",
+                data: {
+                    "product_id" : product_id
+                },
+                success: function () {
+                    $("#addToFavorites").html("");
+                    $('#addToFavorites').append(
+                        "<input type=\"button\" class=\"floated\" value=\"Добавлено\" >"
+                    )
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <!--navigation bar-->
@@ -33,11 +67,14 @@
                     <h3>${tr.getName()}</h3>
                     <span class="price">₽ ${tr.getPrice()}</span>
                     <div class="actions">
-                        <!--<a href="" class="cart-button">В корзину</a>-->
-                        <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
+                        <%--<div id="buttonchik">--%>
+                            <input type="button" name="go-to-basket" class="btns bask" value="В корзину" onclick="f(${tr.getId()}">
+                        <%--</div>--%>
                         <!--<a href="" class="wishlist">В избранное</a>-->
                         <c:if test="${currentUser != null}">
-                            <input type="button" name="add-to-fav" class="btns fav" value="В избранное">
+                        <%--<div id="addToFavorites">--%>
+                            <input type="button" name="add-to-fav" class="btns fav" value="В избранное" onclick="add(${tr.getId()})">
+                        <%--</div>--%>
                         </c:if>
                     </div>
                 </div>

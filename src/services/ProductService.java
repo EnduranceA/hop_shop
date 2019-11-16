@@ -65,4 +65,8 @@ public class ProductService {
     public void delete(int productId, int customerId) {
         productRepository.removeProductFromBasket(productId, customerId);
     }
+
+    public List<Product> findFavorites(int id) {
+        return productRepository.findFavorites(id);
+    }
 }

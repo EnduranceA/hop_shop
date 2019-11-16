@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-        Customer user = (Customer) session.getAttribute("current_user");
+        Customer user = (Customer) session.getAttribute("currentUser");
         try {
             if (user != null) {
                 resp.sendRedirect("/profile");
@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         List<Product> basket;
+        List<Product> favorites;
         String login = req.getParameter("mail");
         Customer user = (Customer) session.getAttribute("currentUser");
         if (req.getParameter("remember") != null) {
@@ -63,7 +64,9 @@ public class LoginServlet extends HttpServlet {
                 if (encoder.matches(req.getParameter("password"), customer.getPassword())) {
                     session.setAttribute("currentUser", customer);
                     basket = productService.findBasket(customer.getId());
+                    favorites = productService.findFavorites(customer.getId());
                     session.setAttribute("basket", basket);
+                    session.setAttribute("favorites", favorites);
                     resp.sendRedirect("/profile");
                 }
                 else {

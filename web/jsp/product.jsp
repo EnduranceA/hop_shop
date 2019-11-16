@@ -31,6 +31,23 @@
                 }
             })
         }
+
+        function add(product_id) {
+            $.ajax ({
+                type:"POST",
+                url: "/favorites",
+                data: {
+                    "product_id" : product_id
+                },
+                success: function () {
+                    $("#addToFavorites").html("");
+                    $('#addToFavorites').append(
+                        "<input type=\"button\" class=\"floated\" value=\"Добавлено\" >"
+                    )
+                }
+            })
+        }
+
         function send_comment(product_id) {
             $.ajax({
                 type: "POST",
@@ -79,8 +96,10 @@
                 <div class="text-info">${product.getDescription()} </div>
                 <div class="buttons">
                     <c:if test="${currentUser != null}">
-                        <input type="submit" class="floated" value="В избранное">
-                    </c:if>
+                        <div id="addToFavorites">
+                            <input type="submit" class="floated" value="В избранное" onclick="add(${product.getId()})">
+                        </div>
+                        </c:if>
                     <div id="buttonchik">
                         <input type="button" class="floated" id="addToBasket" value="В корзину" onclick=f(${product.getId()})>
                     </div>
@@ -128,20 +147,3 @@
 <%@include file= "includes/footer.jsp"%>
 </body>
 </html>
-
-
-<%--"<div class=\"comment\">\n" +--%>
-<%--"    <div class=\"cont2\">\n" +--%>
-    <%--"        <img src=\"" + msg.array[1].getPathPhoto() + "\">\n" +--%>
-    <%--"    </div>\n" +--%>
-<%--"    <div class=\"cont2\">\n" +--%>
-    <%--"        <div class=\"info\">\n" +--%>
-        <%--"            <p class=\"username\">" +  msg.array[1].getFirstName()--%>
-            <%--+ " " + msg.array[1].getLastName() + "</p>\n" +--%>
-        <%--"            <p class=\"date\">" +  msg.array[0].getTime() + "</p>\n" +--%>
-        <%--"                        <div class=\"comment-text\">\n" +--%>
-            <%--msg.array[0].text +--%>
-            <%--"                        </div>\n" +--%>
-        <%--"        </div>\n" +--%>
-    <%--"    </div>\n" +--%>
-<%--"</div>"--%>
