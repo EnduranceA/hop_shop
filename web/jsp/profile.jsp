@@ -31,38 +31,32 @@
     </div>
     <div class="cont_lk">
         <div class="title_lk">Профиль</div>
-        <form class="reg-form" action="/profile" method="post">
+        <form class="reg-form" method="post">
             <div class="form-row">
-                <label for="form_fname">Имя:</label>
-                <input type="text" id="form_fname" name="first_name" value="${user.getFirstName()}">
+                <label for="first_name">Имя:</label>
+                <input type="text" id="first_name" name="first_name" value="${currentUser.getFirstName()}">
             </div>
             <div class="form-row">
-                <label for="form_lname">Фамилия:</label>
-                <input type="text" id="form_lname" name="last_name" value="${user.getLastName()}">
+                <label for="last_name">Фамилия:</label>
+                <input type="text" id="last_name" name="last_name" value="${currentUser.getLastName()}">
             </div>
             <div class="form-row">
-                <label for="form_tname">Отчество:</label>
-                <input type="text" id="form_tname" name="third_name" value="${user.getPatronymic()}">
+                <label for="patronymic">Отчество:</label>
+                <input type="text" id="patronymic" name="patronymic" value="${currentUser.getPatronymic()}">
             </div>
-            <img src="${user.getPathPhoto()}"  id="user_pic" width="200" alt="userpic">
-            <div class="form-photo">
-                <label for="form_photo">Фото:</label>
-                <input type="file" id="form_photo" name="choose-file" multiple accept="image/*,image/jpeg">
+            <img src="${currentUser.getPathPhoto()}"  id="user_pic" width="200">
+            <div class="form-row">
+                <label for="mail">Почта:</label>
+                <input type="text" id="mail" name="mail" value="${currentUser.getMail()}">
             </div>
             <div class="form-row">
-                <label for="form_mail">Почта:</label>
-                <input type="text" id="form_mail" name="mail" value="${user.getMail()}">
-            </div>
-            <div class="form-row">
-                <label for="form_phone">Номер телефона:</label>
-                <input type="text" id="form_phone" name="phone" value="${user.getPhoneNumber()}">
-            </div>
-            <div class="form-row">
-                <label for="form_new_password">Новый пароль:</label>
-                <input type="password" id="form_new_password" name="password">
+                <label for="phone">Номер телефона:</label>
+                <input type="text" id="phone" name="phone" value="${currentUser.getPhoneNumber()}">
             </div>
             <div class="form-row to-reg">
-                <input type="submit" value="Сохранить">
+                <form action="/profile" method="post">
+                    <input type="submit" value="Сохранить" >
+                </form>
             </div>
         </form>
 

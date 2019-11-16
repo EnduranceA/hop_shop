@@ -13,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet("/order")
@@ -23,7 +25,8 @@ public class OrderServlet extends HttpServlet {
     private ProductService productService;
     private AddressService addressService;
     private Customer customer;
-    private Product product;
+    private List<Product> basket;
+    private int amount;
 
     @Override
     public void init() {
@@ -33,12 +36,18 @@ public class OrderServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response){
-//        product = productService.findProductBy(
-//                Integer.parseInt(request.getParameter("id")));
+        basket = productService.findBasket(
+                Integer.parseInt(request.getParameter("basket")));
         try {
             //проверить авторизован ли пользователь
             customer = (Customer) request.getSession().getAttribute("currentUser");
             if (customer != null) {
+                request.setAttribute("basket", basket);
+                amount = 0;
+                for (int i = 0; i < basket.size(); i++) {
+                    amount += basket.get(i).getPrice();
+                }
+                request.setAttribute("amount", amount);
                 request.getServletContext().getRequestDispatcher("/jsp/order.jsp").forward(request, response);
             }
             else {
@@ -53,20 +62,22 @@ public class OrderServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response){
         try {
-        Address address = new Address(request.getParameter("area"), request.getParameter("region"),
-                request.getParameter("locality"), request.getParameter("street"),
-                Integer.parseInt(request.getParameter("home_number")),Integer.parseInt(request.getParameter("apartment")) );
-        addressService.add(address);
+            HttpSession session = request.getSession();
+            Address address = new Address(request.getParameter("area"), request.getParameter("region"),
+                    request.getParameter("locality"), request.getParameter("street"),
+                    Integer.parseInt(request.getParameter("home_number")),Integer.parseInt(request.getParameter("apartment")) );
+            addressService.add(address);
 
-        Booking booking = new Booking(customer.getId(),product.getPrice(),1, address.getId(),
-                request.getParameter("payment"), request.getParameter("delivery"),
-                request.getParameter("info"));
+            Booking booking = new Booking(customer.getId(), amount,1, address.getId(),
+                    request.getParameter("payment"), request.getParameter("delivery"),
+                    request.getParameter("info"));
 
-        bookingService.addBooking(booking);
-
-        request.setAttribute("booking", booking);
-        request.getServletContext().getRequestDispatcher("/successful_order").forward(request, response);
-        } catch (ServletException | IOException e) {
+            bookingService.addBooking(booking);
+            bookingService.saveProducts(booking, basket);
+            session.setAttribute("booking", booking);
+            request.getServletContext().getRequestDispatcher("/successful_order").forward(request, response);
+        }
+        catch (ServletException | IOException e) {
             throw new IllegalArgumentException(e);
         }
 

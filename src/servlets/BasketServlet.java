@@ -52,10 +52,5 @@ public class BasketServlet extends HttpServlet {
                 break;
             }
         }
-        try {
-            response.sendRedirect("/basket");
-        } catch (IOException e) {
-            throw new IllegalArgumentException(e);
-        }
     }
 }

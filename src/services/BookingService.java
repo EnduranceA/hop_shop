@@ -1,7 +1,10 @@
 package services;
 
 import models.Booking;
+import models.Product;
 import repositories.BookingRepositoryImpl;
+
+import java.util.List;
 
 public class BookingService {
 
@@ -15,4 +18,9 @@ public class BookingService {
         bookingRepository.save(booking);
     }
 
+    public void saveProducts(Booking booking, List<Product> basket) {
+        for (int i = 0; i < basket.size(); i++) {
+            bookingRepository.saveProduct(booking.getId(), basket.get(i).getId());
+        }
+    }
 }

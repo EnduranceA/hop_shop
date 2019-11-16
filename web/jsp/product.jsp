@@ -78,9 +78,9 @@
                 <p style="color:#55286F ">В наличии: ${product.getCount()}</p>
                 <div class="text-info">${product.getDescription()} </div>
                 <div class="buttons">
-                    <form action="/order?booking=${booking.getId()}">
-                        <input type="submit" class="floated" value="Заказать">
-                    </form>
+                    <c:if test="${currentUser != null}">
+                        <input type="submit" class="floated" value="В избранное">
+                    </c:if>
                     <div id="buttonchik">
                         <input type="button" class="floated" id="addToBasket" value="В корзину" onclick=f(${product.getId()})>
                     </div>

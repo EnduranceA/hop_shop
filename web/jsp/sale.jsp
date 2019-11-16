@@ -36,7 +36,9 @@
                         <!--<a href="" class="cart-button">В корзину</a>-->
                         <input type="button" name="go-to-basket" class="btns bask" value="В корзину">
                         <!--<a href="" class="wishlist">В избранное</a>-->
-                        <input type="button" name="add-to-fav" class="btns fav" value="В избранное">
+                        <c:if test="${currentUser != null}">
+                            <input type="button" name="add-to-fav" class="btns fav" value="В избранное">
+                        </c:if>
                     </div>
                 </div>
             </div>

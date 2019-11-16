@@ -21,6 +21,26 @@
 <div class="order_container">
     <p class="order_text">Оформление заказа</p>
     <form class="order-form"  enctype="multipart/form-data" action="" method="post">
+        <div class="order_list">
+        <c:if test="${basket != null}">
+            <c:forEach var="tr" items="${basket}">
+                <div class="product-item order-item">
+                    <div class="product-img">
+                        <a href="/product?id=${tr.getId()}">
+                            <img src="${tr.getPathPhoto()}">
+                        </a>
+                    </div>
+                    <div class="product-list">
+                        <h3>${tr.getName()}</h3>
+                        <span class="price">₽ ${tr.getPrice()}</span>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:if>
+        </div>
+
+        <p class="order_cost">Сумма к оплате: <strong>${amount}</strong></p>
+        <br>
         <div class="form-row inline-infa">
             <input type="text" id="form_lname" name="last_name" value="${currentUser.getFirstName()}">
         </div>

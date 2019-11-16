@@ -15,11 +15,14 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     //language=SQL
-    private final String SQL_FIND_ALL = "SELECT *FROM booking;";
+    private String SQL_FIND_ALL = "SELECT *FROM booking;";
 
     //language=SQL
-    private final String SQL_INSERT_BOOKING = "INSERT INTO booking (id_customer, time, amount, id_status, id_address, payment, delivery, info) " +
+    private String SQL_INSERT_BOOKING = "INSERT INTO booking (id_customer, time, amount, id_status, id_address, payment, delivery, info) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?) returning id;";
+
+    //language=SQL
+    private String SQL_SAVE_PRODUCT = "INSERT INTO booking_product (id_booking, id_product) VALUES (?, ?);";
 
     public RowMapper<Booking> bookingRowMapper = row -> {
         try{
@@ -82,5 +85,16 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public void remove(Booking booking) {
 
+    }
+
+    public void saveProduct(int bookingId, int productId) {
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_SAVE_PRODUCT);
+            st.setInt(1, bookingId);
+            st.setInt(2, productId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 }

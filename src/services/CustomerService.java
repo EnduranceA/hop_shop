@@ -23,9 +23,7 @@ public class CustomerService {
         return customerRepository.findCustomer(mail);
     }
 
-    public void update(Customer customer, Map<String, String> map) {
-        customerRepository.changeRow(customer, map);
-    }
+
 
     public void addNewCustomer(ServletContext context, String firstName, String lastName, String patronymic, Part photo,
                                String mail, String password, String numberPhone) {
@@ -55,6 +53,15 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
+    public Customer findCustomerBy(int id) {
+        return customerRepository.findUserBy(id);
+    }
 
 
+    public void update(int id, String firstName,
+                       String lastName, String patronymic,
+                       String mail, String numberPhone) {
+        customerRepository.changeRow(id, firstName, lastName,
+                patronymic, mail, numberPhone);
+    }
 }

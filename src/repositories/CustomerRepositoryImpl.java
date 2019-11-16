@@ -34,9 +34,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     private String SQL_FIND_USER_BY_ID = "SELECT * FROM customer WHERE id = ?;";
 
     //language=SQL
-    private String SQL_CHANGE_ROW = "UPDATE customer SET path_photo = ? AND first_name = ? " +
-            "AND last_name = ? AND last_name = ? AND patronymic = ? AND phone_number = ? " +
-            "AND password = ? WHERE id = ?;";
+    private String SQL_CHANGE_ROW = "UPDATE customer SET first_name = ? " +
+            ", last_name = ?, patronymic = ?, mail = ?, phone_number = ? " +
+            "WHERE id = ?;";
 
     public RowMapper<Customer> userRowMapper = row -> {
         try{
@@ -134,16 +134,17 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customer;
     }
 
-    public void changeRow(Customer customer, Map<String, String> map) {
+    public void changeRow(int id, String firstName,
+                          String lastName, String patronymic, String mail, String numberPhone) {
         try {
             PreparedStatement st = connection.prepareStatement(SQL_CHANGE_ROW);
-            st.setString(1, map.get("path_photo"));
-            st.setString(2, map.get("first_name"));
-            st.setString(3, map.get("last_name"));
-            st.setString(4, map.get("patronymic"));
-            st.setString(5, map.get("number_phone"));
-            st.setString(6, map.get("password"));
-            st.executeUpdate();
+            st.setString(1, firstName);
+            st.setString(2, lastName);
+            st.setString(3, patronymic);
+            st.setString(4, mail);
+            st.setString(5, numberPhone);
+            st.setInt(6, id);
+            st.execute();
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }

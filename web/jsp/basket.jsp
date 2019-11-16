@@ -17,6 +17,20 @@
     <link rel="stylesheet" href="../css_files/main.css">
     <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
     <script type="text/javascript">
+        function remove(id) {
+            document.getElementById(id).remove();
+        }
+
+        function delete_basket_product(id) {
+            $.ajax({
+                type: "POST",
+                url: "/basket",
+                data: {
+                    id: id
+                }
+            })
+        }
+
         $(document).ready(function(){
             $('.minus-btn').click(function(e){
                 e.preventDefault();
@@ -38,20 +52,6 @@
                 $input.val(value);
             });
         });
-
-        function remove(id) {
-            document.getElementById(id).remove();
-        }
-
-        function delete_basket_product(id) {
-            $.ajax({
-                type: "POST",
-                url: "/basket",
-                data: {
-                    id: id
-                }
-            })
-        }
     </script>
 </head>
 <body>
@@ -64,7 +64,7 @@
         <c:choose>
             <c:when test="${basket != null && !basket.isEmpty()}">
                 <c:forEach var="tr" items="${basket}">
-                    <div class="product-item">
+                    <div class="product-item" id="${tr.getId()}">
                         <div class="product-img">
                             <a href="/product?id=${tr.getId()}">
                                 <img src="${tr.getPathPhoto()}">
@@ -77,20 +77,21 @@
                                 <button class="plus-btn" type="button" name="button">
                                     <img src="../pictures/plus.svg" />
                                 </button>
-                                <input type="text" name="name" value="1" class="counter">
+                                <input type="text" name="count" value="1" class="counter">
                                 <button class="minus-btn" type="button" name="button">
                                     <img src="../pictures/minus.svg" alt="" />
                                 </button>
                             </div>
                             <div class="actions">
-                                <input type="button" name="delete-from-basket" onclick="delete_basket_product(${tr.getId()}); remove(${tr.getId()})" class="bask_btn" value="Удалить из корзины">
+                                <input type="button" onclick="delete_basket_product(${tr.getId()}); remove(${tr.getId()})"
+                                       class="bask_btn" value="Удалить из корзины">
                             </div>
                         </div>
                     </div>
                 </c:forEach>
-                    <form action="/order">
+                    <a href="/order?basket=${currentUser.getId()}">
                         <button class="ctlg_button">Оформить заказ</button>
-                    </form>
+                    </a>
             </c:when>
             <c:otherwise>
                 <div class="emptybasket">

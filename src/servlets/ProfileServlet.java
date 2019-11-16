@@ -16,6 +16,7 @@ import java.util.Map;
 public class ProfileServlet extends HttpServlet {
 
     private CustomerService customerService;
+    private Customer customer;
 
     @Override
     public void init()  {
@@ -24,13 +25,12 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        Customer user = (Customer) req.getSession().getAttribute("currentUser");
+        customer = (Customer) req.getSession().getAttribute("currentUser");
         try {
-            if (user == null) {
+            if (customer == null) {
                 resp.sendRedirect("/login");
             }
             else {
-                req.setAttribute("user", user);
                 req.getServletContext().getRequestDispatcher("/jsp/profile.jsp").forward(req, resp);
             }
         } catch (ServletException | IOException e) {
@@ -40,15 +40,15 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        Customer customer= (Customer) req.getSession().getAttribute("currentUser");
-        Map<String, String> map = new HashMap<>();
-        map.put("path_photo", req.getParameter("path_photo"));
-        map.put("first_name", req.getParameter("first_name"));
-        map.put("last_name", req.getParameter("last_name"));
-        map.put("patronymic", req.getParameter("patronymic"));
-        map.put("number_phone", req.getParameter("number_phone"));
-        map.put("password", req.getParameter("password"));
-        customerService.update(customer, map);
+        customer= (Customer) req.getSession().getAttribute("currentUser");
+        int id = customer.getId();
+        String firstName = req.getParameter("first_name");
+        String lastName = req.getParameter("last_name");
+        String patronymic = req.getParameter("patronymic");
+        String mail = req.getParameter("mail");
+        String numberPhone = req.getParameter("phone");
+        customerService.update(id, firstName, lastName, patronymic, mail, numberPhone);
+        req.getSession().setAttribute("currentUser", customerService.findCustomerBy(customer.getId()));
         try {
             req.getServletContext().getRequestDispatcher("/jsp/profile.jsp").forward(req, resp);
         } catch (ServletException | IOException e) {
