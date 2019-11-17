@@ -69,4 +69,8 @@ public class ProductService {
     public List<Product> findFavorites(int id) {
         return productRepository.findFavorites(id);
     }
+
+    public void removeProductsFromBasket(int id) {
+        productRepository.removeFromBasket(id);
+    }
 }

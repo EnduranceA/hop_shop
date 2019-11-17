@@ -18,14 +18,14 @@
         function f(product_id) {
             $.ajax ({
                 type:"POST",
-                url: "/product",
+                url: "/addProduct",
                 data: {
                     "product_id" : product_id
                 },
                 success: function () {
                     $("#buttonchik").html("");
                     $('#buttonchik').append(
-                        "<input type=\"button\" class=\"floated\" id=\"addToBasket\"  value=\"Добавлено\" >"
+                        "<input type=\"button\" class=\"btns bask\" value=\"Добавлено\" >"
                     )
                 }
             })
@@ -68,9 +68,7 @@
                     <span class="price">₽ ${tr.getPrice()}</span>
                     <div class="actions">
                         <!--<a href="" class="cart-button">В корзину</a>-->
-                        <%--<div id="buttonchik">--%>
-                            <input type="button" name="go-to-basket" class="btns bask" value="В корзину" onclick="f(${tr.getId()})">
-                        <%--</div>--%>
+                        <input type="button" class="btns bask" value="В корзину" >
                         <!--<a href="" class="wishlist">В избранное</a>-->
                         <c:if test="${currentUser != null}">
                             <%--<div id="addToFavorites">--%>

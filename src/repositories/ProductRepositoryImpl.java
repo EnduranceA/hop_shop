@@ -48,6 +48,9 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     //language=SQL
     private String SQL_FIND_FAVORITES = "SELECT * FROM favorites WHERE id_customer = ?;";
+
+    //language=SQL
+    private String SQL_REMOVE_FROM_BASKET = "DELETE * FROM basket WHERE customer_id = ?;";
     @Override
     public void save(Product product) {
         try {
@@ -240,5 +243,16 @@ public class ProductRepositoryImpl implements ProductRepository {
             throw new IllegalArgumentException(e);
         }
         return favorites;
+    }
+
+    public void removeFromBasket(int id) {
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_REMOVE_FROM_BASKET);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+
     }
 }

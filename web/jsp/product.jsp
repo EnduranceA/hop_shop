@@ -99,7 +99,7 @@
                         <div id="addToFavorites">
                             <input type="submit" class="floated" value="В избранное" onclick="add(${product.getId()})">
                         </div>
-                        </c:if>
+                    </c:if>
                     <div id="buttonchik">
                         <input type="button" class="floated" id="addToBasket" value="В корзину" onclick=f(${product.getId()})>
                     </div>

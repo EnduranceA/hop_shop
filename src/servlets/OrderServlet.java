@@ -63,9 +63,14 @@ public class OrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response){
         try {
             HttpSession session = request.getSession();
-            Address address = new Address(request.getParameter("area"), request.getParameter("region"),
-                    request.getParameter("locality"), request.getParameter("street"),
-                    Integer.parseInt(request.getParameter("home_number")),Integer.parseInt(request.getParameter("apartment")) );
+            Address address = new Address(
+                    request.getParameter("area"),
+                    request.getParameter("region"),
+                    request.getParameter("locality"),
+                    request.getParameter("street"),
+                    Integer.parseInt(request.getParameter("home_number")),
+                    Integer.parseInt(request.getParameter("apartment"))
+            );
             addressService.add(address);
 
             Booking booking = new Booking(customer.getId(), amount,1, address.getId(),
@@ -75,7 +80,10 @@ public class OrderServlet extends HttpServlet {
             bookingService.addBooking(booking);
             bookingService.saveProducts(booking, basket);
             session.setAttribute("booking", booking);
-            request.getServletContext().getRequestDispatcher("/successful_order").forward(request, response);
+
+            productService.removeProductsFromBasket(customer.getId());
+
+            request.getServletContext().getRequestDispatcher("/jsp/successful_order.jsp").forward(request, response);
         }
         catch (ServletException | IOException e) {
             throw new IllegalArgumentException(e);
