@@ -23,4 +23,8 @@ public class BookingService {
             bookingRepository.saveProduct(booking.getId(), basket.get(i).getId());
         }
     }
+
+    public List<Booking> findAllBookings(int id) {
+        return bookingRepository.findBookingsBy(id);
+    }
 }

@@ -61,17 +61,23 @@ public class LoginServlet extends HttpServlet {
             }
             else {
                 Customer customer = customerService.findCustomerBy(login);
-                if (encoder.matches(req.getParameter("password"), customer.getPassword())) {
-                    session.setAttribute("currentUser", customer);
-                    basket = productService.findBasket(customer.getId());
-                    favorites = productService.findFavorites(customer.getId());
-                    session.setAttribute("basket", basket);
-                    session.setAttribute("favorites", favorites);
-                    resp.sendRedirect("/profile");
+                if (customer != null) {
+                    if (encoder.matches(req.getParameter("password"), customer.getPassword())) {
+                        session.setAttribute("currentUser", customer);
+                        basket = productService.findBasket(customer.getId());
+                        favorites = productService.findFavorites(customer.getId());
+                        session.setAttribute("basket", basket);
+                        session.setAttribute("favorites", favorites);
+                        resp.sendRedirect("/profile");
+                    }
+                    else {
+                        req.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
+                    }
                 }
                 else {
                     req.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
                 }
+
             }
         } catch (IOException | ServletException e) {
             throw new IllegalArgumentException(e);

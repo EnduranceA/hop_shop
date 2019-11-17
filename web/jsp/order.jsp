@@ -20,7 +20,6 @@
 
 <div class="order_container">
     <p class="order_text">Оформление заказа</p>
-    <form class="order-form"  action="/order" method="post">
         <div class="order_list">
             <c:if test="${basket != null}">
                 <c:forEach var="tr" items="${basket}">
@@ -38,7 +37,7 @@
                 </c:forEach>
             </c:if>
         </div>
-
+    <form class="order-form" action="/order" method="post">
         <p class="order_cost">Сумма к оплате: <strong>${amount}</strong></p>
         <br>
         <div class="form-row inline-infa">
@@ -99,15 +98,13 @@
             <span class="checkmark"></span>
         </label>
         <p class="headline">Комментарий к заказу</p>
-        <form class="decor">
+        <div class="decor">
             <div class="form-comment">
                 <textarea name="info" rows="3"></textarea>
             </div>
-        </form>
+        </div>
         <div class="form-row pay">
-            <form method="get" action="/successful_order" >
-                <input type="submit" value="Оплатить">
-            </form>
+            <input type="submit" value="Оплатить">
         </div>
     </form>
 </div>

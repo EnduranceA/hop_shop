@@ -82,6 +82,7 @@ public class OrderServlet extends HttpServlet {
             session.setAttribute("booking", booking);
 
             productService.removeProductsFromBasket(customer.getId());
+            session.removeAttribute("basket");
 
             request.getServletContext().getRequestDispatcher("/jsp/successful_order.jsp").forward(request, response);
         }

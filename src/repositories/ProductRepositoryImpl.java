@@ -50,7 +50,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     private String SQL_FIND_FAVORITES = "SELECT * FROM favorites WHERE id_customer = ?;";
 
     //language=SQL
-    private String SQL_REMOVE_FROM_BASKET = "DELETE * FROM basket WHERE customer_id = ?;";
+    private String SQL_REMOVE_FROM_BASKET = "DELETE FROM basket WHERE customer_id = ?;";
     @Override
     public void save(Product product) {
         try {

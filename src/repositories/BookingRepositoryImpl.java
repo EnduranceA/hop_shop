@@ -24,6 +24,9 @@ public class BookingRepositoryImpl implements BookingRepository {
     //language=SQL
     private String SQL_SAVE_PRODUCT = "INSERT INTO booking_product (id_booking, id_product) VALUES (?, ?);";
 
+    //language=SQL
+    private String SQL_FIND_BOOKINGS = "SELECT * FROM booking WHERE id_customer = ?;";
+
     public RowMapper<Booking> bookingRowMapper = row -> {
         try{
             Integer id = row.getInt("id");
@@ -96,5 +99,20 @@ public class BookingRepositoryImpl implements BookingRepository {
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public List<Booking> findBookingsBy(int customerId) {
+        List<Booking> bookings = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(SQL_FIND_BOOKINGS);
+            st.setInt(1, customerId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                bookings.add(bookingRowMapper.mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return bookings;
     }
 }

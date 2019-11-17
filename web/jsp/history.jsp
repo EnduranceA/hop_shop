@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: DEEGER
@@ -31,23 +32,22 @@
         </form>
     </div>
     <div class="cont_elem">
+    <c:if test="${bookings != null}">
+        <c:forEach var="tr" items="${bookings}">
         <div class="element">
             <div class="item-info">
-                <img src="../pictures/tatu2.png" alt="tatu">
-            </div>
-            <div class="item-info">
-                <p class="item_name">Tatu 2</p>
-                <p class="order_number">Номер заказа: <span style="font-weight: bold">329010</span></p>
+                <p class="order_number">Номер заказа: <span style="font-weight: bold">${tr.getId()}</span></p>
             </div>
             <div class="item-info right-info">
-                <p class="order_price">₽ 1000</p>
+                <p class="order_price">₽ ${tr.getAmount()}</p>
                 <!--если заказ завершен, добавляем класс completed
                 если в обработке - processing, заказ отправлен - ontheway -->
-                <p class="order_status completed">Завершен</p>
+                <p class="order_status ontheway">Заказ отправлен</p>
             </div>
         </div>
+        </c:forEach>
+    </c:if>
     </div>
-
 </div>
 <!--здесь типа футер-->
 <%@include file= "includes/footer.jsp"%>
